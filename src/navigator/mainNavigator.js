@@ -1,20 +1,35 @@
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-import SplashScreen from "../features/SplashScreen";
+import Splash from "../containers/Splash";
+import Login from "../containers/Login";
+import Signup from "../containers/Signup";
+import Main from "../containers/Main";
 /**
  * new navigators can be imported here
  */
 
 const AppNavigator = createStackNavigator(
   {
-    SplashScreen: {
-      screen: SplashScreen
+    splash: {
+      screen: Splash
+    },
+    login: {
+      screen: Login
+    },
+    signup: {
+      screen: Signup
+    },
+    main: {
+      screen: Main
     }
-    /** new navigators can be added here */
   },
   {
-    initialRouteName: "SplashScreen"
-    // headerMode: "none" /** you can play with this */
+    initialRouteName: "splash",
+    defaultNavigationOptions: {
+			gesturesEnabled: false
+		},
+		headerMode: 'none',
+		lazyLoad: true
   }
 );
 
