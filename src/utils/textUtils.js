@@ -1,5 +1,6 @@
-function formatNumber(num) {
-  return num > 999 ? `${(num / 1000).toFixed(1)}k` : num;
+export const formatDuration = duration => {
+  const totalSecs = Math.round(duration);
+  const mins = Math.floor(totalSecs / 60);
+  const secs = totalSecs - mins * 60;
+  return `${mins}:${secs}`;
 }
-
-export default formatNumber;
