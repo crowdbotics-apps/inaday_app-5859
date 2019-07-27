@@ -3,6 +3,7 @@ import { View, Image, StyleSheet, Text, TouchableOpacity, Dimensions } from 'rea
 import SettingButton from '../../components/SettingButton';
 import Loader from '../../components/Loader';
 import LoginButton from "../../components/LoginButton";
+import firebase from "react-native-firebase";
 
 const { height } = Dimensions.get('screen');
 class Setting extends Component {
@@ -18,8 +19,13 @@ class Setting extends Component {
     });
   }
 
-  onLogOut = () => {
-
+  onLogOut = async () => {
+    try {
+      await firebase.auth().signOut();
+      this.props.navigation.navigate('login');
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   onUpgradeMonth = () => {
@@ -43,7 +49,7 @@ class Setting extends Component {
   }
 
   onNavigateToMain = () => {
-
+    this.props.navigation.navigate('main');
   }
 
   render() {
@@ -53,12 +59,12 @@ class Setting extends Component {
         <View style={styles.background}>
           <TouchableOpacity
             style={styles.backButton}
+            onPress={this.onNavigateToMain}
           >
             <Image
               source={require('../../assets/icons/backIcon.png')}
               style={styles.backButtonImg}
               resizeMode='contain'
-              onPress={this.onNavigateToMain}
             />
           </TouchableOpacity>
           <Text
@@ -166,7 +172,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    marginTop: '35%'
+    marginTop: '50%'
   },
   topDescription: {
     marginTop: height * 2.5 / 100,
