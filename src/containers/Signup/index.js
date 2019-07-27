@@ -64,69 +64,74 @@ class Signup extends Component {
     this.props.navigation.navigate('login');
   }
 
+  onNavigateToTerms = () => {
+    this.props.navigation.navigate('login');
+  }
+
   render() {
     const { name, email, password, cPassword, loaderVisible } = this.state;
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../../assets/images/bg1.png')}
-          style={styles.background}
-        />
-        <Image
-          source={require('../../assets/images/logo.png')}
-          style={styles.logo}
-          resizeMode='contain'
-        />
-        <LoginInput
-          value={name}
-          onChangeText={this.onChangeText('name')}
-          placeholder="Name"
-          style={{ marginTop: height * 7.7 / 100 }}
+        <View style={styles.background}>
+          <Image
+            source={require('../../assets/images/logo.png')}
+            style={styles.logo}
+            resizeMode='contain'
           />
-        <LoginInput
-          value={email}
-          onChangeText={this.onChangeText('email')}
-          placeholder="Email"
-          style={{ marginTop: height * 0.02 }}
-          keyboardType='email-address'
-          autoCapitalize='none'
-        />
-        <LoginInput
-          value={password}
-          onChangeText={this.onChangeText('password')}
-          placeholder="Password"
-          style={{ marginTop: height * 0.02 }}
-          secureTextEntry
-        />
-        <LoginInput
-          value={cPassword}
-          onChangeText={this.onChangeText('cPassword')}
-          placeholder="Confirm Password"
-          style={{ marginTop: height * 0.02 }}
-          secureTextEntry
-        />
-        <LoginButton
-          title="SIGN UP"
-          style={{ marginTop: height * 0.02 }}
-          onPress={this.onSignUp}
-        />
-        <FBButton
-          title="SIGN UP WITH FACEBOOK"
-          style={{ marginTop: height * 7 / 100 }}
-          onPress={this.onSignUpFacebook}
-        />
-        <View style={styles.bottomContainer}>
-          <Text style={styles.desc}>Have an account?</Text>
-          <TouchableOpacity
-            style={{ marginLeft: 2 }}
-            onPress={this.onNavigateToSignIn}
-          >
-            <Text style={[styles.desc, { fontWeight: 'bold' }]}>Sign in now</Text>
-          </TouchableOpacity>
+          <LoginInput
+            value={email}
+            onChangeText={this.onChangeText('email')}
+            placeholder="Email"
+            style={{ marginTop: height * 6.5 / 100 }}
+            keyboardType='email-address'
+            autoCapitalize='none'
+          />
+          <LoginInput
+            value={password}
+            onChangeText={this.onChangeText('password')}
+            placeholder="Password"
+            style={{ marginTop: height * 0.01 }}
+            secureTextEntry
+          />
+          <LoginInput
+            value={cPassword}
+            onChangeText={this.onChangeText('cPassword')}
+            placeholder="Confirm Password"
+            style={{ marginTop: height * 0.01 }}
+            secureTextEntry
+          />
+          <LoginButton
+            title="SIGN UP"
+            style={{ marginTop: height * 0.01 }}
+            onPress={this.onSignUp}
+          />
+          <FBButton
+            title="SIGN UP WITH FACEBOOK"
+            style={{ marginTop: height * 6.5 / 100 }}
+            onPress={this.onSignUpFacebook}
+          />
+          <View style={styles.singInContainer}>
+            <Text style={styles.desc}>Have an account?</Text>
+            <TouchableOpacity
+              style={{ marginLeft: 2 }}
+              onPress={this.onNavigateToSignIn}
+            >
+              <Text style={[styles.desc, { fontWeight: 'bold' }]}>Sign in now</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.termContainer}>
+            <Text
+              style={styles.desc}
+              onPress={this.onNavigateToTerms}
+            >Terms</Text>
+          </View>
+          <View style={styles.bottomContainer}>
+            <Text style={styles.logoText}>INADAY@</Text>
+          </View>
+          <Loader
+            visible={loaderVisible}
+          />
         </View>
-        <Loader
-          visible={loaderVisible}
-        />
       </View>
     )
   }
@@ -144,16 +149,19 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   background: {
-    position: 'absolute',
+    height: '100%',
     width: '100%',
-    height: '100%'
+    alignItems: 'center',
+    backgroundColor: '#373E4C',
+    flex: 1,
+    justifyContent: 'center'
   },
   logo: {
     height: '16%',
-    marginTop: '15%'
+    marginTop: '35%'
   },
-  bottomContainer: {
-    marginTop: 48.5,
+  singInContainer: {
+    marginTop: 12,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
@@ -163,7 +171,23 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: '#FFFFFF',
     letterSpacing: -0.5
-  }
-})
+  },
+  bottomContainer: {
+    flex: 1,
+    alignSelf: 'flex-end',
+    justifyContent: 'flex-end',
+    marginBottom: 30,
+    right: 30,
+  },
+  logoText: {
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.6)'
+  },
+  termContainer: {
+    marginTop: height * 6.5 / 100,
+    display: 'flex',
+    alignItems: 'center',
+  },
+});
 
 export default Signup;
