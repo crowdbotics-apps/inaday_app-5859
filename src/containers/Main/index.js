@@ -19,10 +19,10 @@ class Main extends Component {
   timer = null;
 
   componentDidMount() {
-    _onFinishedPlayingSubscription = SoundPlayer.addEventListener('FinishedPlaying', ({ success }) => {
+    this._onFinishedPlayingSubscription = SoundPlayer.addEventListener('FinishedPlaying', ({ success }) => {
       console.log('finished playing', success)
     });
-    _onFinishedLoadingURLSubscription = SoundPlayer.addEventListener('FinishedLoadingURL', async ({ success, url }) => {
+    this._onFinishedLoadingURLSubscription = SoundPlayer.addEventListener('FinishedLoadingURL', async ({ success, url }) => {
       if (success) {
         const info = await SoundPlayer.getInfo();
         this.setState({
@@ -33,8 +33,8 @@ class Main extends Component {
     });
 
     try {
-      SoundPlayer.loadUrl('https://firebasestorage.googleapis.com/v0/b/inaday.appspot.com/o/lesson.mp3?alt=media&token=48fe65c3-d1d5-490c-97ce-f1981c1edb52');
-      timer = setInterval(async () => {
+      SoundPlayer.loadUrl('https://firebasestorage.googleapis.com/v0/b/inaday.appspot.com/o/1564064079545-Shoe%20Dog%20Book%20Summary.mp3?alt=media&token=a72f2b40-6bea-46bb-a499-2be315323947');
+      this.timer = setInterval(async () => {
         if (this.state.isPlaying) {
           if (this.state.current >= this.state.duration) {
             clearInterval(this.timer);
@@ -56,11 +56,12 @@ class Main extends Component {
   }
 
   componentWillUnmount() {
-    _onFinishedPlayingSubscription.remove();
-    _onFinishedLoadingFileSubscription.remove();
+    this._onFinishedPlayingSubscription.remove();
+    this._onFinishedLoadingURLSubscription.remove();
   }
 
   onPlay = () => {
+    console.log('play!');
     if (this.state.current > this.state.duration) {
       this.setState({
         current: 0
@@ -81,6 +82,10 @@ class Main extends Component {
     this.setState({
       selectedIndex: index
     })
+  }
+
+  onNavigateToSetting = () => {
+    this.props.navigation.navigate('setting');
   }
 
   render() {
@@ -114,7 +119,7 @@ class Main extends Component {
           <View style={{ flex: 1 }}>
             <DayComponent
               day="TODAY"
-              title="Lesson Nine"
+              title="Shoe Dog Book Summary"
               isPlaying={selectedIndex === 2 && isPlaying}
               isReady={selectedIndex === 2 && isReady}
               current={selectedIndex === 2 && current}
@@ -136,6 +141,7 @@ class Main extends Component {
         </Swiper>
         <TouchableOpacity
           style={styles.settingsBtn}
+          onPress={this.onNavigateToSetting}
         >
           <Image
             source={require('../../assets/images/settings.png')}
