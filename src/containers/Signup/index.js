@@ -9,7 +9,6 @@ import Loader from '../../components/Loader';
 const { height } = Dimensions.get('screen');
 class Signup extends Component {
   state = {
-    name: '',
     email: '',
     password: '',
     cPassword: '',
@@ -26,15 +25,15 @@ class Signup extends Component {
     this.setState({
       loaderVisible: true
     });
-    const { name, email, password, cPassword } = this.state;
-    if (!name.length || !email.length || !password.length || !cPassword.length) {
+    const { email, password, cPassword } = this.state;
+    if (!email.length || !password.length || !cPassword.length) {
       alert('All fields are required');
       return;
     } else if (password !== cPassword) {
       alert('Password mismatch');
     } else {
       try {
-        await signUp(name, email, password);
+        await signUp(email, password);
         this.props.navigation.navigate('main');
       } catch (error) {
         alert(error.message);
@@ -69,7 +68,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { name, email, password, cPassword, loaderVisible } = this.state;
+    const { email, password, cPassword, loaderVisible } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.background}>
