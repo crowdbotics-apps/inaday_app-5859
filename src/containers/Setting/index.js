@@ -51,12 +51,16 @@ class Setting extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.background}>
-          <Image
-            source={require('../../assets/icons/backIcon.png')}
-            style={styles.backward}
-            resizeMode='contain'
-            onPress={this.onNavigateToMain}
-          />
+          <TouchableOpacity
+            style={styles.backButton}
+          >
+            <Image
+              source={require('../../assets/icons/backIcon.png')}
+              style={styles.backButtonImg}
+              resizeMode='contain'
+              onPress={this.onNavigateToMain}
+            />
+          </TouchableOpacity>
           <Text
             style={styles.topText}
           >BASIC PLAN</Text>
@@ -129,13 +133,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center'
   },
-  backward: {
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 30,
+  },
+  backButtonImg: {
     flex: 1,
     alignSelf: 'flex-start',
     justifyContent: 'flex-start',
-    width: '5.5%',
-    left: 30,
-    marginTop: '10%'
+    width: 20,
+    height: 20
   },
   bottomContainer: {
     flex: 1,
