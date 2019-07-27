@@ -17,16 +17,16 @@ const LoginButton = ({
 const styles = StyleSheet.create({
   container: {
     width: '80%',
-    height: '6.25%',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 40,
+    height: '4.7%',
+    backgroundColor: '#58BED3',
+    borderRadius: 12,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
   },
   title: {
-    color: '#3AC0B8',
-    fontSize: 20,
+    color: '#FFFFFF',
+    fontSize: 14,
     fontWeight: 'bold',
     textTransform: 'uppercase'
   }

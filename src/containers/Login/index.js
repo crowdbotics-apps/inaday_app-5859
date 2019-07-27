@@ -64,52 +64,60 @@ class Login extends Component {
     const { email, password, loaderVisible } = this.state;
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../../assets/images/bg1.png')}
-          style={styles.background}
-        />
-        <Image
-          source={require('../../assets/images/logo.png')}
-          style={styles.logo}
-          resizeMode='contain'
-        />
-        <LoginInput
-          value={email}
-          onChangeText={this.onChangeText('email')}
-          placeholder="Email"
-          style={{ marginTop: height * 7.7 / 100 }}
-          keyboardType='email-address'
-          autoCapitalize='none'
-        />
-        <LoginInput
-          value={password}
-          onChangeText={this.onChangeText('password')}
-          placeholder="Password"
-          style={{ marginTop: height * 0.02 }}
-          secureTextEntry
-        />
-        <LoginButton
-          title="SIGN IN"
-          style={{ marginTop: height * 0.02 }}
-          onPress={this.onSignIn}
-        />
-        <FBButton
-          title="SIGN IN WITH FACEBOOK"
-          style={{ marginTop: height * 7 / 100 }}
-          onPress={this.onSignInFacebook}
-        />
-        <View style={styles.bottomContainer}>
-          <Text style={styles.desc}>Don't have an account yet?</Text>
-          <TouchableOpacity
-            style={{ marginLeft: 2 }}
-            onPress={this.onNavigateToSignUp}
-          >
-            <Text style={[styles.desc, { fontWeight: 'bold' }]}>Sign up now</Text>
-          </TouchableOpacity>
+        <View style={styles.background}>
+          <Image
+            source={require('../../assets/images/logo.png')}
+            style={styles.logo}
+            resizeMode='contain'
+          />
+          <LoginInput
+            value={email}
+            onChangeText={this.onChangeText('email')}
+            placeholder="Email"
+            style={{ marginTop: height * 6.5 / 100 }}
+            keyboardType='email-address'
+            autoCapitalize='none'
+          />
+          <LoginInput
+            value={password}
+            onChangeText={this.onChangeText('password')}
+            placeholder="Password"
+            style={{ marginTop: height * 0.01 }}
+            secureTextEntry
+          />
+          <LoginButton
+            title="SIGN IN WITH EMAIL"
+            style={{ marginTop: height * 0.01 }}
+            onPress={this.onSignIn}
+          />
+          <FBButton
+            title="SIGN IN WITH FACEBOOK"
+            style={{ marginTop: height * 6.5 / 100 }}
+            onPress={this.onSignInFacebook}
+          />
+          <View style={styles.singUpContainer}>
+            <Text style={styles.desc}>Don't have an account yet?</Text>
+            <TouchableOpacity
+              style={{ marginLeft: 2 }}
+              onPress={this.onNavigateToSignUp}
+            >
+              <Text style={[styles.desc, { fontWeight: 'bold' }]}>Sign up now</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.termContainer}>
+            <Text
+              style={styles.desc}
+              onPress={this.onNavigateToSignUp}
+            >Terms</Text>
+            <Text style={styles.termText}>“With the new day comes new strengths and new thoughts.” - Eleanor Roosevelt</Text>
+          </View>
+          <View style={styles.bottomContainer}>
+            <Text style={styles.logoText}>INADAY@</Text>
+          </View>
+          <Loader
+            visible={loaderVisible}
+          />
         </View>
-        <Loader
-          visible={loaderVisible}
-        />
       </View>
     )
   }
@@ -127,26 +135,53 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   background: {
-    position: 'absolute',
+    height: '100%',
     width: '100%',
-    height: '100%'
-  },
-  logo: {
-    height: '16%',
-    marginTop: '15%'
+    alignItems: 'center',
+    backgroundColor: '#373E4C',
+    flex: 1,
+    justifyContent: 'center'
   },
   bottomContainer: {
-    marginTop: 48.5,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center'
+    flex: 1,
+    alignSelf: 'flex-end',
+    justifyContent: 'flex-end',
+    marginBottom: 30,
+    right: 30,
   },
   desc: {
     fontSize: 15,
     fontWeight: 'normal',
     color: '#FFFFFF',
     letterSpacing: -0.5
+  },
+  logo: {
+    height: '16%',
+    marginTop: '35%'
+  },
+  logoText: {
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.6)'
+  },
+  singUpContainer: {
+    marginTop: 12,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  termContainer: {
+    marginTop: height * 6.5 / 100,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  termText: {
+    marginTop: 15,
+    fontSize: 15,
+    fontWeight: 'normal',
+    color: '#90949C',
+    letterSpacing: -0.5,
+    textAlign: 'center',
   }
-})
+});
 
 export default Login;

@@ -17,17 +17,16 @@ const FBButton = ({
 const styles = StyleSheet.create({
   container: {
     width: '80%',
-    height: '6.25%',
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
-    borderRadius: 40,
+    height: '4.7%',
+    backgroundColor: '#58BED3',
+    borderRadius: 12,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
   },
   title: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: 'bold',
     textTransform: 'uppercase'
   }

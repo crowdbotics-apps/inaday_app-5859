@@ -24,10 +24,10 @@ const LoginInput = ({
 const styles = StyleSheet.create({
   inputContainer: {
     width: '80%',
-    height: '6.25%',
+    height: '4.7%',
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 28,
-    borderRadius: 40,
+    borderRadius: 12,
     fontSize: 15,
     fontWeight: '600'
   }
