@@ -11,15 +11,13 @@ class Splash extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image
-          source={require('../../assets/images/bg1.png')}
-          style={styles.background}
-        />
-        <Image
-          source={require('../../assets/images/logo.png')}
-          style={styles.logo}
-          resizeMode='contain'
-        />
+        <View style={styles.background}>
+          <Image
+            source={require('../../assets/images/logo.png')}
+            style={styles.logo}
+            resizeMode='contain'
+          />
+        </View>
       </View>
     )
   }
@@ -33,12 +31,16 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   background: {
-    position: 'absolute',
-    width: '100%'
+    backgroundColor: '#373E4C',
+    // position: 'absolute',
+    width: '100%',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   logo: {
-    width: '60%'
+    width: '40%'
   }
-})
+});
 
 export default Splash;
