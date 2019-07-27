@@ -60,6 +60,10 @@ class Login extends Component {
     this.props.navigation.navigate('signup');
   }
 
+  onNavigateToTerms = () => {
+    this.props.navigation.navigate('login');
+  }
+
   render() {
     const { email, password, loaderVisible } = this.state;
     return (
@@ -107,7 +111,7 @@ class Login extends Component {
           <View style={styles.termContainer}>
             <Text
               style={styles.desc}
-              onPress={this.onNavigateToSignUp}
+              onPress={this.onNavigateToTerms}
             >Terms</Text>
             <Text style={styles.termText}>“With the new day comes new strengths and new thoughts.” - Eleanor Roosevelt</Text>
           </View>
