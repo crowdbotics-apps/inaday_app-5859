@@ -120,10 +120,10 @@ class Main extends Component {
             <DayComponent
               day="TODAY"
               title="Shoe Dog Book Summary"
-              isPlaying={selectedIndex === 2 && isPlaying}
-              isReady={selectedIndex === 2 && isReady}
-              current={selectedIndex === 2 && current}
-              duration={selectedIndex === 2 && duration}
+              isPlaying={isPlaying}
+              isReady={isReady}
+              current={current}
+              duration={duration}
               onPlay={selectedIndex === 2 ? this.onPlay : () => {}}
             />
           </View>
