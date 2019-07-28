@@ -1,10 +1,9 @@
 import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 
-export const signUp = async (name, email, password) => {
+export const signUp = async (email, password) => {
   const res = await firebase.auth().createUserWithEmailAndPassword(email, password);
   await firebase.firestore().collection('users').doc(res.user.uid).set({
-    name,
     email
   });
 }
@@ -18,7 +17,7 @@ export const signInWithFacebook = async () => {
 
   if (result.isCancelled) {
     // handle this however suites the flow of your app
-    throw new Error('User cancelled request'); 
+    throw new Error('User cancelled request');
   }
 
   console.log(`Login success with permissions: ${result.grantedPermissions.toString()}`);
@@ -39,7 +38,6 @@ export const signInWithFacebook = async () => {
   const snapshot = await firebase.firestore().collection('users').doc(firebaseUserCredential.user.uid).get();
   if (!snapshot.exists) {
     await firebase.firestore().collection('users').doc(firebaseUserCredential.user.uid).set({
-      name: firebaseUserCredential.user.displayName,
       email: firebaseUserCredential.user.email
     });
   }
