@@ -25,16 +25,16 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb733986520376238</string>
+				<string>fb492921061442898</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>2</string>
 	<key>FacebookAppID</key>
-	<string>733986520376238</string>
+	<string>492921061442898</string>
 	<key>FacebookDisplayName</key>
-	<string>Inaday</string>
+	<string>INADAY</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>
