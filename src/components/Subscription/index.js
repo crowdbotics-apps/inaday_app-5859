@@ -6,7 +6,7 @@ const { width } = Dimensions.get('screen');
 
 class Subscription extends Component {
   componentDidMount() {
-    
+
   }
 
   render() {
@@ -39,7 +39,7 @@ class Subscription extends Component {
         >
           <Text style={styles.buttonText}>SUBSCRIBE FOR $90.99/YEAR</Text>
         </TouchableOpacity>
-        
+
         <View style={styles.bottomContainer}>
           <View style={styles.bottomBtns}>
             <TouchableOpacity>
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000000'
+    backgroundColor: '#373E4C'
   },
   title: {
     fontSize: 24,
