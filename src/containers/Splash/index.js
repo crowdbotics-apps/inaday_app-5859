@@ -4,7 +4,7 @@ import { View, StyleSheet, Image } from 'react-native';
 class Splash extends Component {
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('login');
+      this.props.navigation.navigate('signup');
     }, 3000);
   }
 
