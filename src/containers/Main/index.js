@@ -124,7 +124,7 @@ class Main extends Component {
               isReady={isReady}
               current={current}
               duration={duration}
-              onPlay={selectedIndex === 2 ? this.onPlay : () => {}}
+              onPlay={this.onPlay}
             />
           </View>
           {/* <View style={{ flex: 1 }}>

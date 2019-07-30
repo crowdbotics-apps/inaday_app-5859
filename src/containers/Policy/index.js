@@ -6,60 +6,24 @@ import LoginButton from "../../components/LoginButton";
 import firebase from "react-native-firebase";
 
 const { height } = Dimensions.get('screen');
-class Setting extends Component {
+class Policy extends Component {
   state = {
     loaderVisible: false
-  }
-
-  onChangeText = type => value => {
-    this.setState({
-      [type]: value
-    });
-  }
-
-  onLogOut = async () => {
-    try {
-      await firebase.auth().signOut();
-      this.props.navigation.navigate('login');
-    } catch (error) {
-      alert(error.message);
-    }
-  }
-
-  onUpgradeMonth = () => {
-
-  }
-
-  onUpgradeYear = () => {
-
-  }
-
-  onNavigateToAbout = () => {
-    this.props.navigation.navigate('about');
-  }
-
-  onNavigateToPrivacy = () => {
-    this.props.navigation.navigate('policy');
-  }
-
-  onNavigateToTerms = () => {
-    this.props.navigation.navigate('terms');
-  }
-
-  onNavigateToMain = () => {
-    this.props.navigation.navigate('main');
   }
 
   render() {
     const { loaderVisible } = this.state;
     const { goBack } = this.props.navigation;
 
+    const terms = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sem nulla, lacinia ut nisl sed, mollis dignissim risus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin sollicitudin leo in semper hendrerit. Pellentesque congue metus ex, et posuere lacus iaculis at. Integer molestie sodales cursus. Sed lacinia blandit odio, eu vehicula metus posuere at. Morbi vel arcu purus. Pellentesque massa quam, tristique placerat molestie at, efficitur ut sapien. Phasellus augue risus, aliquam et nibh vitae, mattis consectetur massa. Proin hendrerit commodo nisl quis sagittis.\n\n' +
+    'Vivamus feugiat est eu fermentum mattis. Vestibulum mattis mollis justo ut pharetra. Morbi tincidunt interdum urna, ac pretium quam vulputate non. Duis ante ligula, sodales non mollis non, semper ut mauris. Donec nec nisl aliquet ipsum scelerisque tristique ac non nunc. Curabitur varius auctor sem, quis venenatis augue gravida ut. Nullam tempus tortor eget mauris efficitur finibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam quis quam vitae elit consequat aliquam. In nec quam eget ante sollicitudin blandit. Fusce vitae purus ut sapien viverra mollis eu vitae turpis.';
+    
     return (
       <View style={styles.container}>
         <View style={styles.background}>
           <TouchableOpacity
             style={styles.backButton}
-            onPress={this.onNavigateToMain}
+            onPress={() => goBack()}
           >
             <Image
               source={require('../../assets/icons/backIcon.png')}
@@ -69,54 +33,15 @@ class Setting extends Component {
           </TouchableOpacity>
           <Text
             style={styles.topText}
-          >BASIC PLAN</Text>
+          >PRIVACY POLICY</Text>
           <Text
             style={styles.topDescription}
-          >Your subscription will automatically be renewed unless turned off in Account Settings at least 24 hours before the current period ends. Payment is charged to your iTunes account.</Text>
-          <SettingButton
-            title="UPGRADE FOR $9.99/MONTH"
-            style={{ marginTop: height * 4.5 / 100 }}
-            onPress={this.onUpgradeMonth}
-          />
-          <SettingButton
-            title="UPGRADE FOR $99.99/YEAR"
-            style={{ marginTop: height * 0.01 }}
-            onPress={this.onUpgradeYear}
-          />
+          >{terms}</Text>
           <LoginButton
-            title="LOG OUT"
-            style={{ marginTop: height * 15 / 100 }}
-            onPress={this.onLogOut}
+            title="CLOSE"
+            style={{ marginTop: height * 5 / 100 }}
+            onPress={() => goBack()}
           />
-          <View style={styles.termContainer}>
-            <View style={styles.termText}>
-              <TouchableOpacity
-                onPress={this.onNavigateToAbout}
-              >
-                <Text
-                  style={styles.desc}
-                >About</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.termText}>
-              <TouchableOpacity
-                onPress={this.onNavigateToTerms}
-              >
-                <Text
-                  style={styles.desc}
-                >Terms</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.termText}>
-            <TouchableOpacity
-                onPress={this.onNavigateToPrivacy}
-            >
-              <Text
-                style={styles.desc}
-              >Privacy</Text>
-            </TouchableOpacity>
-            </View>
-          </View>
           <View style={styles.bottomContainer}>
             <Text style={styles.logoText}>INADAY@</Text>
           </View>
@@ -178,19 +103,20 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.6)'
   },
   topText: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    marginTop: '50%'
+    marginTop: '30%'
   },
   topDescription: {
     marginTop: height * 2.5 / 100,
+    marginLeft: 10,
     width: '95%',
     fontSize: 14,
     fontWeight: 'normal',
     color: '#FFFFFF',
     letterSpacing: -0.2,
-    textAlign: 'center',
+    textAlign: 'left',
   },
   termContainer: {
     marginTop: height * 6.5 / 100,
@@ -206,4 +132,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Setting;
+export default Policy;

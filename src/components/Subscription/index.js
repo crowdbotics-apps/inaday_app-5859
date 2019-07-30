@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 const features = ['Access to all record', 'Access to all lesson', 'Other exclusive cont'];
 const { width } = Dimensions.get('screen');
@@ -7,6 +8,18 @@ const { width } = Dimensions.get('screen');
 class Subscription extends Component {
   componentDidMount() {
 
+  }
+
+  onNavigateToAbout = () => {
+    this.props.navigation.navigate('about');
+  }
+
+  onNavigateToPrivacy = () => {
+    this.props.navigation.navigate('policy');
+  }
+
+  onNavigateToTerms = () => {
+    this.props.navigation.navigate('terms');
   }
 
   render() {
@@ -42,13 +55,19 @@ class Subscription extends Component {
 
         <View style={styles.bottomContainer}>
           <View style={styles.bottomBtns}>
-            <TouchableOpacity>
-              <Text style={styles.bottomBtnText}>Restore</Text>
+            <TouchableOpacity
+              onPress={this.onNavigateToAbout}
+            >
+              <Text style={styles.bottomBtnText}>About</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+            onPress={this.onNavigateToTerms}
+            >
               <Text style={styles.bottomBtnText}>Terms</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.onNavigateToPrivacy}
+            >
               <Text style={styles.bottomBtnText}>Privacy</Text>
             </TouchableOpacity>
           </View>
@@ -146,4 +165,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Subscription;
+export default withNavigation(Subscription);

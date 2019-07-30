@@ -61,7 +61,7 @@ class Login extends Component {
   }
 
   onNavigateToTerms = () => {
-    this.props.navigation.navigate('login');
+    this.props.navigation.navigate('terms');
   }
 
   render() {
@@ -100,19 +100,22 @@ class Login extends Component {
             onPress={this.onSignInFacebook}
           />
           <View style={styles.singUpContainer}>
-            <Text style={styles.desc}>Don't have an account yet?</Text>
+            <Text style={styles.desc}>Don't have an account yet? </Text>
             <TouchableOpacity
               style={{ marginLeft: 2 }}
               onPress={this.onNavigateToSignUp}
             >
-              <Text style={[styles.desc, { fontWeight: 'bold' }]}>Sign up now</Text>
+              <Text style={[styles.desc, { fontWeight: 'bold' }]}> Sign up now</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.termContainer}>
-            <Text
-              style={styles.desc}
+            <TouchableOpacity
               onPress={this.onNavigateToTerms}
-            >Terms</Text>
+            >
+              <Text
+                style={styles.desc}
+              >Terms</Text>
+            </TouchableOpacity>
             <Text style={styles.termText}>“With the new day comes new strengths and new thoughts.” - Eleanor Roosevelt</Text>
           </View>
           <View style={styles.bottomContainer}>
@@ -168,7 +171,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.6)'
   },
   singUpContainer: {
-    marginTop: 12,
+    marginTop: 15,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
