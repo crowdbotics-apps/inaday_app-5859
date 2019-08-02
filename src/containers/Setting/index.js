@@ -4,6 +4,7 @@ import SettingButton from '../../components/SettingButton';
 import Loader from '../../components/Loader';
 import LoginButton from "../../components/LoginButton";
 import firebase from "react-native-firebase";
+import {Logout} from '../../api/auth';
 
 const { height } = Dimensions.get('screen');
 class Setting extends Component {
@@ -19,8 +20,9 @@ class Setting extends Component {
 
   onLogOut = async () => {
     try {
-      await firebase.auth().signOut();
+      await Logout();
       this.props.navigation.navigate('login');
+
     } catch (error) {
       alert(error.message);
     }

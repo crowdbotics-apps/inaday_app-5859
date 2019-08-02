@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
+import {CheckStore} from "../../api/auth";
 
 class Splash extends Component {
-  componentDidMount() {
-    setTimeout(() => {
-      this.props.navigation.navigate('signup');
-    }, 3000);
+  async componentDidMount() {
+    const res = await CheckStore();
+    if (res) {
+      this.props.navigation.navigate('main');
+    } else {
+      setTimeout(() => {
+        this.props.navigation.navigate('signup');
+      }, 3000);
+    }
   }
 
   render() {
