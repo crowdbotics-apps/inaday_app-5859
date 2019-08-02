@@ -1,0 +1,15 @@
+// Here you can add other styles
+.ui.table {
+  button {
+    padding: 10px !important;
+    i.icon {
+      margin: 0 !important;
+    }
+  }
+}
+
+.ui.modal {
+  top: unset !important;
+  left: unset !important;
+  height: unset !important;
+}
