@@ -61,12 +61,12 @@
     "react-scripts": "2.1.8"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:cov": "react-scripts test --coverage",
-    "test:debug": "react-scripts --inspect-brk test --runInBand",
-    "eject": "react-scripts eject"
+    "admin": "./node_modules/.bin/react-scripts start",
+    "admin:build": "./node_modules/.bin/react-scripts build",
+    "admin:test": "./node_modules/.bin/react-scripts test",
+    "admin:cov": "./node_modules/.bin/react-scripts test --coverage",
+    "admin:debug": "./node_modules/.bin/react-scripts --inspect-brk test --runInBand",
+    "admin:eject": "./node_modules/.bin/react-scripts eject"
   },
   "bugs": {
     "url": "https://github.com/coreui/coreui-pro-react-admin-template-starter/issues"
