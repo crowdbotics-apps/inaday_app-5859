@@ -128,7 +128,7 @@ class Signup extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainer}>
-            <Text style={styles.logoText}>INADAY@</Text>
+            <Text style={styles.logoText}>© 2019 Inaday</Text>
           </View>
           <Loader
             visible={loaderVisible}

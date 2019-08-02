@@ -4,7 +4,7 @@ import { formatDuration } from '../../utils/textUtils';
 import PlayButton from '../PlayButton';
 
 class DayComponent extends Component {
-  
+
   render() {
     const { day, title, isPlaying, isReady, duration, current, onPlay } = this.props;
     let progress = 0;

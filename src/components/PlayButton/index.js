@@ -20,6 +20,7 @@ const PlayButton = ({
       isReady &&
       <Progress.Circle
         size={125}
+        direction="counter-clockwise"
         progress={progress}
         borderWidth={0}
         thickness={8}

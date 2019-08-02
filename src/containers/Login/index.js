@@ -119,7 +119,7 @@ class Login extends Component {
             <Text style={styles.termText}>“With the new day comes new strengths and new thoughts.” - Eleanor Roosevelt</Text>
           </View>
           <View style={styles.bottomContainer}>
-            <Text style={styles.logoText}>INADAY@</Text>
+            <Text style={styles.logoText}>© 2019 Inaday</Text>
           </View>
           <Loader
             visible={loaderVisible}

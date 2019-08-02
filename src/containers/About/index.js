@@ -17,7 +17,7 @@ class About extends Component {
 
     const terms = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sem nulla, lacinia ut nisl sed, mollis dignissim risus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin sollicitudin leo in semper hendrerit. Pellentesque congue metus ex, et posuere lacus iaculis at. Integer molestie sodales cursus. Sed lacinia blandit odio, eu vehicula metus posuere at. Morbi vel arcu purus. Pellentesque massa quam, tristique placerat molestie at, efficitur ut sapien. Phasellus augue risus, aliquam et nibh vitae, mattis consectetur massa. Proin hendrerit commodo nisl quis sagittis.\n\n' +
     'Vivamus feugiat est eu fermentum mattis. Vestibulum mattis mollis justo ut pharetra. Morbi tincidunt interdum urna, ac pretium quam vulputate non. Duis ante ligula, sodales non mollis non, semper ut mauris. Donec nec nisl aliquet ipsum scelerisque tristique ac non nunc. Curabitur varius auctor sem, quis venenatis augue gravida ut. Nullam tempus tortor eget mauris efficitur finibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam quis quam vitae elit consequat aliquam. In nec quam eget ante sollicitudin blandit. Fusce vitae purus ut sapien viverra mollis eu vitae turpis.';
-    
+
     return (
       <View style={styles.container}>
         <View style={styles.background}>
@@ -43,7 +43,7 @@ class About extends Component {
             onPress={() => goBack()}
           />
           <View style={styles.bottomContainer}>
-            <Text style={styles.logoText}>INADAY@</Text>
+            <Text style={styles.logoText}>© 2019 Inaday</Text>
           </View>
           <Loader
             visible={loaderVisible}
