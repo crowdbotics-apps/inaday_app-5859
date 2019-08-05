@@ -88,6 +88,7 @@ class Main extends Component {
     this.props.navigation.navigate('setting');
   }
 
+
   render() {
     const { selectedIndex, isPlaying, isReady, current, duration } = this.state;
     return (

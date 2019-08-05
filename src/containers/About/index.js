@@ -3,12 +3,26 @@ import { View, Image, StyleSheet, Text, TouchableOpacity, Dimensions } from 'rea
 import SettingButton from '../../components/SettingButton';
 import Loader from '../../components/Loader';
 import LoginButton from "../../components/LoginButton";
-import firebase from "react-native-firebase";
+import {Logout} from '../../api/auth';
 
 const { height } = Dimensions.get('screen');
 class About extends Component {
   state = {
     loaderVisible: false
+  }
+
+  onNavigateToTerms = () => {
+    this.props.navigation.navigate('terms');
+  }
+
+  onLogOut = async () => {
+    try {
+      await Logout();
+      this.props.navigation.navigate('login');
+
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   render() {
@@ -38,10 +52,19 @@ class About extends Component {
             style={styles.topDescription}
           >{terms}</Text>
           <LoginButton
-            title="CLOSE"
+            title="LOG OUT"
             style={{ marginTop: height * 5 / 100 }}
-            onPress={() => goBack()}
+            onPress={ this.onLogOut}
           />
+          <View style={styles.termContainer}>
+            <TouchableOpacity
+              onPress={this.onNavigateToTerms}
+            >
+              <Text
+                style={styles.desc}
+              >Terms</Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.bottomContainer}>
             <Text style={styles.logoText}>© 2019 Inaday</Text>
           </View>

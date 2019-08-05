@@ -11,7 +11,6 @@ class Signup extends Component {
   state = {
     email: '',
     password: '',
-    cPassword: '',
     loaderVisible: false
   }
 
@@ -22,12 +21,10 @@ class Signup extends Component {
   }
 
   onSignUp = async () => {
-    const { email, password, cPassword } = this.state;
-    if (!email.length || !password.length || !cPassword.length) {
+    const { email, password } = this.state;
+    if (!email.length || !password.length) {
       alert('All fields are required');
       return;
-    } else if (password !== cPassword) {
-      alert('Password mismatch');
     } else {
       try {
         this.setState({
@@ -68,7 +65,7 @@ class Signup extends Component {
   }
 
   render() {
-    const { email, password, cPassword, loaderVisible } = this.state;
+    const { email, password, loaderVisible } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.background}>
@@ -89,13 +86,6 @@ class Signup extends Component {
             value={password}
             onChangeText={this.onChangeText('password')}
             placeholder="Password"
-            style={{ marginTop: height * 0.01 }}
-            secureTextEntry
-          />
-          <LoginInput
-            value={cPassword}
-            onChangeText={this.onChangeText('cPassword')}
-            placeholder="Confirm password"
             style={{ marginTop: height * 0.01 }}
             secureTextEntry
           />
