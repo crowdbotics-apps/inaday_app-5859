@@ -17,7 +17,8 @@ export const signIn = async (email, password) => {
 }
 
 export const signInWithFacebook = async () => {
-  const result = await LoginManager.logInWithPermissions(['email']);
+  LoginManager.logOut();
+  const result = await LoginManager.logInWithPermissions(['public_profile', 'email'])
 
   if (result.isCancelled) {
     // handle this however suites the flow of your app
