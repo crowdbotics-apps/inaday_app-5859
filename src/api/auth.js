@@ -8,12 +8,12 @@ export const signUp = async (email, password) => {
   await firebase.firestore().collection('users').doc(res.user.uid).set({
     email
   });
-  await AsyncStorage.setItem('@InadayStore', 'SIGN_IN_USER');
+  await AsyncStorage.setItem('@InadayStore', res.user.uid);
 }
 
 export const signIn = async (email, password) => {
-  await firebase.auth().signInWithEmailAndPassword(email, password);
-  await AsyncStorage.setItem('@InadayStore', 'SIGN_IN_USER');
+  const result = await firebase.auth().signInWithEmailAndPassword(email, password);
+  await AsyncStorage.setItem('@InadayStore', result.user.uid);
 }
 
 export const signInWithFacebook = async () => {
@@ -46,7 +46,7 @@ export const signInWithFacebook = async () => {
       email: firebaseUserCredential.user.email
     });
   }
-  await AsyncStorage.setItem('@InadayStore', 'SIGN_IN_USER');
+  await AsyncStorage.setItem('@InadayStore', snapshot.id);
 }
 
 export const Logout = async () => {
