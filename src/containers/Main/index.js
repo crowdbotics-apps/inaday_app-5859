@@ -15,10 +15,10 @@ class Main extends Component {
     duration: 0,
     isReady: false,
     isPlaying: false,
-    isRequiredSubscrip
+    isRequiredSubscription: false,
     file: {},
     playLogs: [],
-    selectedIndex: 2,
+    selectedIndex: 1,
     uid: null,
   };
 
@@ -35,7 +35,7 @@ class Main extends Component {
     await this.getUserByUid(this.state.uid);
 
     if (this.state.playLogs && this.state.playLogs.length > 0) {
-      const timeDiff = (date.getTime() - this.state.playLogs[this.state.playLogs.length -1].trackAt) / (1000 * 3600 * 24);
+      const timeDiff = this.getDayDiff(date.getTime(this.state.playLogs[this.state.playLogs.length -1].trackAt));
       if (timeDiff > 1) {
         await this.setNextPlayList();
       } else {
@@ -91,18 +91,26 @@ class Main extends Component {
     this._onFinishedLoadingURLSubscription.remove();
   }
 
+  getDayDiff = (val) => (date.getTime() - val) / (1000 * 3600 * 24);
+
   getUserByUid = uid =>
     new Promise((resolve) => {
       const user = firebase.firestore().collection('users').doc(uid);
       user.onSnapshot(async snapshot => {
+        const dt = new Date( "August 05, 2019 00:15:20" );
+        console.log(dt.getTime());
         let userData = {
           id: snapshot.data().id,
+          createdAt: snapshot.data().createdAt,
           playLogs: snapshot.data().playLogs,
           status: snapshot.data().status,
         };
         this.setState({
-          playLogs: snapshot.data().playLogs,
+          isRequiredSubscription: this.getDayDiff(userData.createdAt) > 7,
+          playLogs: userData.playLogs,
+          selectedIndex: this.getDayDiff(userData.createdAt) > 7 ? 1 : 2,
         });
+        console.log(this.state.selectedIndex)
         resolve(userData);
       });
     });
@@ -214,7 +222,7 @@ class Main extends Component {
     const { selectedIndex, isPlaying, isReady, current, duration } = this.state;
     return (
       <View style={styles.container}>
-        <Swiper
+        {this.state.isRequiredSubscription ? (<Swiper
           loop={false}
           autoplay={false}
           showsButtons={false}
@@ -227,40 +235,31 @@ class Main extends Component {
           <View style={{ flex: 1 }}>
             <Subscription/>
           </View>
-          {/* <View style={{ flex: 1 }}>
-            <DayComponent
-              day="YESTERDAY"
-              title="Lesson Eight"
-              isPlaying={selectedIndex === 1 && isPlaying}
-              isReady={selectedIndex === 1 && isReady}
-              current={selectedIndex === 1 && current}
-              duration={selectedIndex === 1 && duration}
-              onPlay={selectedIndex === 1 ? this.onPlay : () => {}}
-            />
-          </View> */}
-          <View style={{ flex: 1 }}>
-            { this.state.file && <DayComponent
-              day="TODAY"
-              title={this.state.file.name}
-              isPlaying={isPlaying}
-              isReady={isReady}
-              current={current}
-              duration={duration}
-              onPlay={this.onPlay}
-            /> }
-          </View>
-          {/* <View style={{ flex: 1 }}>
-            <DayComponent
-              day="TOMORROW"
-              title="Lesson Ten"
-              isPlaying={selectedIndex === 3 && isPlaying}
-              isReady={selectedIndex === 3 && isReady}
-              current={selectedIndex === 3 && current}
-              duration={selectedIndex === 3 && duration}
-              onPlay={selectedIndex === 3 ? this.onPlay : () => {}}
-            />
-          </View> */}
-        </Swiper>
+        </Swiper>) : (<Swiper
+            loop={false}
+            autoplay={false}
+            showsButtons={false}
+            paginationStyle={{ marginBottom: 30 }}
+            dot={<View style={styles.dot}/>}
+            activeDot={<View style={styles.activeDot}/>}
+            index={selectedIndex}
+            onIndexChanged={this.onIndexChanged}
+          >
+            <View style={{ flex: 1 }}>
+              <Subscription/>
+            </View>
+            <View style={{ flex: 1 }}>
+              {this.state.file.url && <DayComponent
+                day="TODAY"
+                title={this.state.file.name}
+                isPlaying={isPlaying}
+                isReady={isReady}
+                current={current}
+                duration={duration}
+                onPlay={this.onPlay}
+              />}
+            </View>
+          </Swiper>)}
         <TouchableOpacity
           style={styles.settingsBtn}
           onPress={this.onNavigateToSetting}
