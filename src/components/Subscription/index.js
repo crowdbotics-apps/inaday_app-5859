@@ -58,7 +58,7 @@ class Subscription extends Component {
             <TouchableOpacity
               onPress={this.onNavigateToAbout}
             >
-              <Text style={styles.bottomBtnText}>About</Text>
+              <Text style={styles.bottomBtnText}>Restore</Text>
             </TouchableOpacity>
             <TouchableOpacity
             onPress={this.onNavigateToTerms}

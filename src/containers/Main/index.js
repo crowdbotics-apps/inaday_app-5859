@@ -11,15 +11,15 @@ let date = new Date();
 
 class Main extends Component {
   state = {
-    selectedIndex: 2,
-    duration: 0,
     current: 0,
+    duration: 0,
     isReady: false,
     isPlaying: false,
+    isRequiredSubscrip
     file: {},
     playLogs: [],
+    selectedIndex: 2,
     uid: null,
-    latestLogIndex: 0,
   };
 
   _onFinishedPlayingSubscription = null;
@@ -32,7 +32,7 @@ class Main extends Component {
       uid
     });
     console.log('uid', uid);
-    const user = await this.getUserByUid(uid);
+    await this.getUserByUid(this.state.uid);
 
     if (this.state.playLogs && this.state.playLogs.length > 0) {
       const timeDiff = (date.getTime() - this.state.playLogs[this.state.playLogs.length -1].trackAt) / (1000 * 3600 * 24);
@@ -42,11 +42,11 @@ class Main extends Component {
         await this.onTodayPlay();
       }
     } else {
-      await this.setInitPlayList(uid);
+      await this.setInitPlayList();
     }
 
     try {
-      if (this.state.file) {
+      if (this.state.file.url) {
         this._onFinishedPlayingSubscription = await SoundPlayer.addEventListener('FinishedPlaying', ({ success }) => {
           console.log('finished playing', success)
         });
@@ -126,19 +126,19 @@ class Main extends Component {
       });
     });
 
-  setInitPlayList = async uid => {
-    try {
+  setInitPlayList = async () =>
+    new Promise((resolve) => {
       // get first file's info order by `order number`
-      let firstPlayerRef = await firebase.firestore()
+      let firstPlayerRef = firebase.firestore()
         .collection('files')
         .orderBy('order', 'asc')
         .limit(1);
-      firstPlayerRef.get().then(async (documentSnapshots) => {
-        let file = await documentSnapshots.docs[0].data();
+      firstPlayerRef.get().then(async (snapshot) => {
+        let file = await snapshot.docs[0].data();
         this.setState({
           file
         });
-        const user = await firebase.firestore().collection('users').doc(uid);
+        const user = await firebase.firestore().collection('users').doc(this.state.uid);
         user.set({
           playLogs: [
             {
@@ -146,14 +146,13 @@ class Main extends Component {
               trackAt: date.getTime(),
             }
           ]
+        }, {
+          merge: true,
         });
       });
 
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
+      resolve(true);
+    });
 
   setNextPlayList = () =>
     new Promise((resolve) => {

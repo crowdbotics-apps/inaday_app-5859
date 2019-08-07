@@ -1,12 +1,14 @@
 import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import AsyncStorage from '@react-native-community/async-storage';
+const date = new Date();
 
 
 export const signUp = async (email, password) => {
   const res = await firebase.auth().createUserWithEmailAndPassword(email, password);
   await firebase.firestore().collection('users').doc(res.user.uid).set({
-    email
+    email,
+    createdAt: date.getTime(),
   });
   await AsyncStorage.setItem('@InadayStore', res.user.uid);
 }
@@ -43,7 +45,8 @@ export const signInWithFacebook = async () => {
   const snapshot = await firebase.firestore().collection('users').doc(firebaseUserCredential.user.uid).get();
   if (!snapshot.exists) {
     await firebase.firestore().collection('users').doc(firebaseUserCredential.user.uid).set({
-      email: firebaseUserCredential.user.email
+      email: firebaseUserCredential.user.email,
+      createdAt: date.getTime(),
     });
   }
   await AsyncStorage.setItem('@InadayStore', snapshot.id);
