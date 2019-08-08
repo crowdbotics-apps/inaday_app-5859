@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
-const features = ['Access to all record', 'Access to all lesson', 'Other exclusive cont'];
+const features = ['A new summary every day', 'Access to all summaries on-demand', 'Unlock exclusive exercises & more'];
 const { width } = Dimensions.get('screen');
 
 class Subscription extends Component {
@@ -25,7 +25,9 @@ class Subscription extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>IMAGINE A SUBSCRIPTION...</Text>
+        <Text style={styles.title}>UNLOCK ALL OF TODAY</Text>
+        <Text style={styles.subTitle}>First 7 summaries are completely FREE.</Text>
+        <Text style={styles.subContent}>Subscribe to support our amazing team in bringing positivity and wisdom to the world:</Text>
         <View style={styles.featureContainer}>
         {
           features.map(f => (
@@ -89,10 +91,25 @@ const styles = StyleSheet.create({
     backgroundColor: '#373E4C'
   },
   title: {
+    marginTop: '-20%',
     fontSize: 24,
     fontWeight: 'bold',
     lineHeight: 28,
     letterSpacing: 3.2,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginHorizontal: 50
+  },
+  subTitle: {
+    marginTop: 15,
+    fontSize: 17,
+    color: '#FFFFFF',
+    textAlign: 'center',
+    marginHorizontal: 50
+  },
+  subContent: {
+    marginTop: 25,
+    fontSize: 15,
     color: '#FFFFFF',
     textAlign: 'center',
     marginHorizontal: 50
@@ -113,7 +130,7 @@ const styles = StyleSheet.create({
   },
   featureText: {
     marginLeft: 8,
-    fontSize: 17,
+    fontSize: 15,
     lineHeight: 20,
     letterSpacing: -0.41,
     color: '#FFFFFF',
@@ -155,7 +172,7 @@ const styles = StyleSheet.create({
     letterSpacing: -0.24
   },
   bottomText: {
-    fontSize: 13,
+    fontSize: 12,
     lineHeight: 16,
     letterSpacing: -0.08,
     color: '#90949C',
