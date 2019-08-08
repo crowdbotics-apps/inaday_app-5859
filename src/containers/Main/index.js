@@ -8,10 +8,8 @@ import Subscription from '../../components/Subscription';
 import AsyncStorage from "@react-native-community/async-storage";
 
 let date = new Date();
-
-class Main extends Component {
-  state = {
-    current: 0,
+const initialState = {
+  current: 0,
     duration: 0,
     isReady: false,
     isPlaying: false,
@@ -20,7 +18,13 @@ class Main extends Component {
     playLogs: [],
     selectedIndex: 1,
     uid: null,
-  };
+};
+
+class Main extends Component {
+  constructor(props) {
+    super(props);
+    this.state = initialState;
+  }
 
   _onFinishedPlayingSubscription = null;
   _onFinishedLoadingURLSubscription = null;
@@ -39,7 +43,7 @@ class Main extends Component {
       if (timeDiff > 1) {
         await this.setNextPlayList();
       } else {
-        await this.onTodayPlay();
+        await this.onTodayPlay()
       }
     } else {
       await this.setInitPlayList();
@@ -97,8 +101,8 @@ class Main extends Component {
     new Promise((resolve) => {
       const user = firebase.firestore().collection('users').doc(uid);
       user.onSnapshot(async snapshot => {
-        const dt = new Date( "August 05, 2019 00:15:20" );
-        console.log(dt.getTime());
+        // const dt = new Date( "August 05, 2019 00:15:20" );
+        // console.log(dt.getTime());
         let userData = {
           id: snapshot.data().id,
           createdAt: snapshot.data().createdAt,
@@ -110,7 +114,7 @@ class Main extends Component {
           playLogs: userData.playLogs,
           selectedIndex: this.getDayDiff(userData.createdAt) > 7 ? 1 : 2,
         });
-        console.log(this.state.selectedIndex)
+        // console.log(this.getDayDiff(userData.createdAt))
         resolve(userData);
       });
     });
@@ -165,28 +169,30 @@ class Main extends Component {
   setNextPlayList = () =>
     new Promise((resolve) => {
       // get first file's info order by `order number`
-      let playerRef = firebase.firestore()
-        .collection('files')
-        .where('order', '==', this.state.playLogs.length + 1)
-        .limit(1);
+      let playerRef = firebase.firestore().collection('files')
+        .where('order', '>', this.state.playLogs.length - 1)
+        .orderBy('order', 'asc');
 
-      playerRef.get().then(async (documentSnapshots) => {
-        if (documentSnapshots.docs[0]) {
-          let file = await documentSnapshots.docs[0].data();
-          this.setState({
-            file,
-          });
-
-          let playLogs = this.state.playLogs;
-
-          playLogs.push({
-            fileId: file.id,
-            trackAt: date.getTime(),
-          });
-          await firebase.firestore().collection('users').doc(this.state.uid).set({playLogs}, {merge: true});
-
-          resolve(true);
+      playerRef.get().then(async (snapshot) => {
+        for(let i = 0; i < snapshot.docs.length; i ++) {
+          let file = await snapshot.docs[i].data();
+          if (file.active === 1) {
+            this.setState({
+              file,
+            });
+  
+            let playLogs = this.state.playLogs;
+  
+            playLogs.push({
+              fileId: file.id,
+              trackAt: date.getTime(),
+            });
+            await firebase.firestore().collection('users').doc(this.state.uid).set({playLogs}, {merge: true});
+  
+            resolve(true);
+          }
         }
+        
       });
     });
 
