@@ -16,7 +16,7 @@ const initialState = {
     isRequiredSubscription: false,
     file: {},
     playLogs: [],
-    selectedIndex: 1,
+    selectedIndex: 0,
     uid: null,
 };
 
@@ -30,7 +30,7 @@ class Main extends Component {
   _onFinishedLoadingURLSubscription = null;
   timer = null;
 
-  async componentDidMount() {
+  async componentWillMount() {
     const uid = await AsyncStorage.getItem('@InadayStore');
     this.setState({
       uid
@@ -43,7 +43,7 @@ class Main extends Component {
       if (timeDiff > 1) {
         await this.setNextPlayList();
       } else {
-        await this.onTodayPlay()
+        await this.onTodayPlay();
       }
     } else {
       await this.setInitPlayList();
@@ -93,6 +93,7 @@ class Main extends Component {
   componentWillUnmount() {
     this._onFinishedPlayingSubscription.remove();
     this._onFinishedLoadingURLSubscription.remove();
+    this.state = initialState;
   }
 
   getDayDiff = (val) => (date.getTime() - val) / (1000 * 3600 * 24);
@@ -254,7 +255,7 @@ class Main extends Component {
             <View style={{ flex: 1 }}>
               <Subscription/>
             </View>
-            <View style={{ flex: 1 }}>
+            <View style={styles.dayContainer}>
               {this.state.file.url && <DayComponent
                 day="TODAY"
                 title={this.state.file.name}
@@ -283,6 +284,10 @@ class Main extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  dayContainer: {
+    flex: 1,
+    backgroundColor: '#758ec8'
   },
   settingsBtn: {
     position: 'absolute',
