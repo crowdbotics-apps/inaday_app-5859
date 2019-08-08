@@ -41,6 +41,7 @@ class DocumentListContainer extends React.Component {
 
   reload = async () => {
     this.context.showLoading();
+    await DocumentController.sortOrder();
 
     let data = await DocumentController.getDocuments();
     data = data

@@ -63,15 +63,17 @@ export const getDocumentById = id =>
   new Promise((resolve) => {
     let proDoc = Firestore.collection('files').doc(id);
     proDoc.onSnapshot(async snapshot => {
-      let codeData = {
-        id: snapshot.data().id,
-        active: snapshot.data().active,
-        url: snapshot.data().url,
-        order:snapshot.data().order,
-        name: snapshot.data().name,
-      };
-
-      resolve(codeData);
+      if (snapshot.data()) {
+        let codeData = {
+          id: snapshot.data().id,
+          active: snapshot.data().active,
+          url: snapshot.data().url,
+          order:snapshot.data().order,
+          name: snapshot.data().name,
+        };
+  
+        resolve(codeData);
+      }
     });
   });
 
@@ -82,6 +84,22 @@ export const getDocuments = async () => {
 
     let tasks = snapshot.docs.map(proDoc => getDocumentById(proDoc.id));
     return Promise.all(tasks);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const sortOrder = async () => {
+  try {
+    let playerRef = await codeCollection.orderBy('order', 'asc');
+    playerRef.get().then(async (snapshot) => {
+      let files = snapshot.docs;
+      for(let i = 0; i < files.length; i ++) {
+        await codeCollection.doc(files[i].data().id).set({
+          order: i,
+        }, {merge: true});
+      }
+    });
   } catch (error) {
     throw error;
   }
