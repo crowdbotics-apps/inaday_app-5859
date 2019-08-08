@@ -10,7 +10,6 @@ target 'inaday_app_5859' do
   pod 'FBSDKLoginKit'
   pod 'Firebase/Core', '~> 6.3.0'
   pod 'Firebase/Auth', '~> 6.3.0'
-  pod 'Firebase/Database', '~> 6.3.0'
   pod 'Firebase/Firestore', '~> 6.3.0'
   pod 'Firebase/Messaging', '~> 6.3.0'
 
