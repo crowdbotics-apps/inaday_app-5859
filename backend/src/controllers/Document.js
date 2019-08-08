@@ -12,6 +12,7 @@ export const addDocument = async payload => {
     let proDoc = Firestore.collection('files').doc(id);
     await proDoc.set({
       id: id,
+      active: 1,
       name: payload.name,
       url: payload.url,
       order: snapshot.docs.length,
@@ -27,6 +28,7 @@ export const updateDocument = async payload => {
     let proDoc = Firestore.collection('files').doc(payload.id);
     await proDoc.update({
       id: payload.id,
+      active: 1,
       name: payload.name,
       url: payload.url,
       order: payload.order
@@ -39,7 +41,7 @@ export const updateDocument = async payload => {
 export const deactivateDocument = async id => {
   try {
     await codeCollection.doc(id).update({
-      active: false
+      active: 0,
     });
   } catch (error) {
     throw error;
@@ -50,7 +52,7 @@ export const activateDocument = async id => {
 
   try {
     await codeCollection.doc(id).update({
-      active: true
+      active: 1,
     });
   } catch (error) {
     throw error;
@@ -63,8 +65,8 @@ export const getDocumentById = id =>
     proDoc.onSnapshot(async snapshot => {
       let codeData = {
         id: snapshot.data().id,
-        url: snapshot.data().url,
         active: snapshot.data().active,
+        url: snapshot.data().url,
         order:snapshot.data().order,
         name: snapshot.data().name,
       };

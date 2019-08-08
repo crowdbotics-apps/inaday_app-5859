@@ -11,13 +11,14 @@ class DocumentListContainer extends React.Component {
     super(props);
 
     this.columns = [
-      { title: 'No', key: '' },
-      { title: 'Name', key: 'name' },
-      { title: 'Url', key: 'url' },
+      { title: 'Play Order', key: 'order' },
+      { title: 'Name', key: '' },
+      { title: 'Url', key: '' },
       { title: 'Actions', key: '' }
     ];
 
     this.state = {
+      activeFilter: 1,
       data: [],
       keyword: '',
       filter: 'name',
@@ -55,7 +56,14 @@ class DocumentListContainer extends React.Component {
       });
 
     await this.setState({ data });
+    this.sortBy('order');
     this.context.hideLoading();
+  };
+
+  activeFilterChanged = () => {
+    this.setState({
+      activeFilter: 1 - this.state.activeFilter,
+    });
   };
 
   editClicked = id => () => {
@@ -121,8 +129,8 @@ class DocumentListContainer extends React.Component {
       let item = data[i];
       children.push(
         _.isEmpty(item) ? null : (
-          <tr key={item.id}>
-            <td>{`${i + 1}`}</td>
+          item.active === this.state.activeFilter && (<tr key={item.id}>
+            <td>{item.order}</td>
             <td>{item.name}</td>
             <td>
               {item.url && (
@@ -148,7 +156,7 @@ class DocumentListContainer extends React.Component {
                 </span>
               )}
             </td>
-          </tr>
+          </tr>)
         )
       );
     }
@@ -169,6 +177,20 @@ class DocumentListContainer extends React.Component {
                 onChange={this.searchInputChanged}
                 onKeyPress={this.searchInputKeyPressed}
               />
+            </div>
+            <div className={styles.searchfilters}>
+              <div
+                className={styles.filter}
+                onClick={this.activeFilterChanged}
+              >
+                <input
+                  type='checkbox'
+                  value='name'
+                  checked={this.state.activeFilter === 1}
+                  onChange={this.activeFilterChanged}
+                />
+                {this.state.activeFilter === 1 ? 'Active' : 'Deactive'}
+              </div>
             </div>
           </div>
           <div className={styles.btnAdd} onClick={this.addClicked}>
