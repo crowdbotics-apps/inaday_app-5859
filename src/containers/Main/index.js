@@ -10,14 +10,14 @@ import AsyncStorage from "@react-native-community/async-storage";
 let date = new Date();
 const initialState = {
   current: 0,
-    duration: 0,
-    isReady: false,
-    isPlaying: false,
-    isRequiredSubscription: false,
-    file: {},
-    playLogs: [],
-    selectedIndex: 0,
-    uid: null,
+  duration: 0,
+  isReady: false,
+  isPlaying: false,
+  isRequiredSubscription: false,
+  file: {},
+  playLogs: [],
+  selectedIndex: 0,
+  uid: null,
 };
 
 class Main extends Component {
@@ -30,70 +30,71 @@ class Main extends Component {
   _onFinishedLoadingURLSubscription = null;
   timer = null;
 
-  async componentWillMount() {
-    const uid = await AsyncStorage.getItem('@InadayStore');
-    this.setState({
-      uid
-    });
-    console.log('uid', uid);
-    await this.getUserByUid(this.state.uid);
+  async componentDidMount(): void {
+    this.props.navigation.addListener('willFocus', async () => {
+      const uid = await AsyncStorage.getItem('@InadayStore');
+      this.setState({
+        uid
+      });
+      console.log('uid', uid);
+      await this.getUserByUid(this.state.uid);
 
-    if (this.state.playLogs && this.state.playLogs.length > 0) {
-      const timeDiff = this.getDayDiff(date.getTime(this.state.playLogs[this.state.playLogs.length -1].trackAt));
-      if (timeDiff > 1) {
-        await this.setNextPlayList();
+      if (this.state.playLogs && this.state.playLogs.length > 0) {
+        const timeDiff = this.getDayDiff(date.getTime(this.state.playLogs[this.state.playLogs.length -1].trackAt));
+        if (timeDiff > 1) {
+          await this.setNextPlayList();
+        } else {
+          await this.onTodayPlay();
+        }
       } else {
-        await this.onTodayPlay();
+        await this.setInitPlayList();
       }
-    } else {
-      await this.setInitPlayList();
-    }
 
-    try {
-      if (this.state.file.url) {
-        this._onFinishedPlayingSubscription = await SoundPlayer.addEventListener('FinishedPlaying', ({ success }) => {
-          console.log('finished playing', success)
-        });
-        this._onFinishedLoadingURLSubscription = await SoundPlayer.addEventListener('FinishedLoadingURL', async ({ success, url }) => {
-          if (success) {
-            const info = await SoundPlayer.getInfo();
-            this.setState({
-              duration: info.duration,
-              isReady: true
-            });
-          }
-        });
-
-        SoundPlayer.loadUrl(this.state.file.url);
-        this.timer = setInterval(async () => {
-          if (this.state.isPlaying) {
-            if (this.state.current >= this.state.duration) {
-              clearInterval(this.timer);
-              SoundPlayer.seek(0);
-              this.setState({
-                isPlaying: false
-              });
-            } else {
+      try {
+        if (this.state.file.url) {
+          this._onFinishedPlayingSubscription = await SoundPlayer.addEventListener('FinishedPlaying', ({ success }) => {
+            console.log('finished playing', success)
+          });
+          this._onFinishedLoadingURLSubscription = await SoundPlayer.addEventListener('FinishedLoadingURL', async ({ success, url }) => {
+            if (success) {
               const info = await SoundPlayer.getInfo();
               this.setState({
-                current: info.currentTime
+                duration: info.duration,
+                isReady: true
               });
             }
-          }
-        }, 100)
-      }
+          });
 
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
+          SoundPlayer.loadUrl(this.state.file.url);
+          this.timer = setInterval(async () => {
+            if (this.state.isPlaying) {
+              if (this.state.current >= this.state.duration) {
+                clearInterval(this.timer);
+                SoundPlayer.seek(0);
+                this.setState({
+                  isPlaying: false
+                });
+              } else {
+                const info = await SoundPlayer.getInfo();
+                this.setState({
+                  current: info.currentTime
+                });
+              }
+            }
+          }, 100)
+        }
+
+        return true;
+      } catch (error) {
+        console.log(error);
+        return false;
+      }
+    });
   }
 
   componentWillUnmount() {
     this._onFinishedPlayingSubscription.remove();
     this._onFinishedLoadingURLSubscription.remove();
-    this.state = initialState;
   }
 
   getDayDiff = (val) => (date.getTime() - val) / (1000 * 3600 * 24);
@@ -102,8 +103,7 @@ class Main extends Component {
     new Promise((resolve) => {
       const user = firebase.firestore().collection('users').doc(uid);
       user.onSnapshot(async snapshot => {
-        // const dt = new Date( "August 05, 2019 00:15:20" );
-        // console.log(dt.getTime());
+
         let userData = {
           id: snapshot.data().id,
           createdAt: snapshot.data().createdAt,
@@ -122,6 +122,8 @@ class Main extends Component {
 
   onTodayPlay = () =>
     new Promise((resolve) => {
+      const dt = new Date( "August 06, 2019 00:15:20" );
+      console.log(dt.getTime());
       const fileId = this.state.playLogs[this.state.playLogs.length - 1].fileId;
       const file = firebase.firestore().collection('files').doc(fileId);
       file.onSnapshot(async snapshot => {
@@ -170,6 +172,8 @@ class Main extends Component {
   setNextPlayList = () =>
     new Promise((resolve) => {
       // get first file's info order by `order number`
+      const dt = new Date( "August 06, 2019 00:15:20" );
+      console.log('next: ', dt.getTime());
       let playerRef = firebase.firestore().collection('files')
         .where('order', '>', this.state.playLogs.length - 1)
         .orderBy('order', 'asc');
@@ -181,19 +185,19 @@ class Main extends Component {
             this.setState({
               file,
             });
-  
+
             let playLogs = this.state.playLogs;
-  
+
             playLogs.push({
               fileId: file.id,
               trackAt: date.getTime(),
             });
             await firebase.firestore().collection('users').doc(this.state.uid).set({playLogs}, {merge: true});
-  
+
             resolve(true);
           }
         }
-        
+
       });
     });
 
