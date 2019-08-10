@@ -22,6 +22,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1C1059738FC7426BB32D7878 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CA51F6F101442A9FB64E55 /* Roboto-Regular.ttf */; };
+		22E55FDB22FE08FE00F62CCF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E55FDA22FE08FE00F62CCF /* StoreKit.framework */; };
+		22E55FDF22FE913C00F62CCF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E55FDE22FE913C00F62CCF /* UserNotifications.framework */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -396,6 +398,9 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = inaday_app_5859/main.m; sourceTree = "<group>"; };
 		1AA370A9D7D24D3C873AE3C0 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		2174FFF0E4D24D60830DBD51 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		22E55FD922FE07D400F62CCF /* inaday_app_5859.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = inaday_app_5859.entitlements; path = inaday_app_5859/inaday_app_5859.entitlements; sourceTree = "<group>"; };
+		22E55FDA22FE08FE00F62CCF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		22E55FDE22FE913C00F62CCF /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		2D02E47B1E0B4A5D006451C7 /* inaday_app_5859-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "inaday_app_5859-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* inaday_app_5859-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "inaday_app_5859-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -444,6 +449,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22E55FDF22FE913C00F62CCF /* UserNotifications.framework in Frameworks */,
 				6F197A8122EC2BD800DB7574 /* libreact-native-fbsdk.a in Frameworks */,
 				6F197A7F22EC2BCD00DB7574 /* libFBSDKLoginKit.a in Frameworks */,
 				6F197A7D22EC2BC700DB7574 /* libFBSDKShareKit.a in Frameworks */,
@@ -456,6 +462,7 @@
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
 				00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */,
+				22E55FDB22FE08FE00F62CCF /* StoreKit.framework in Frameworks */,
 				133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */,
 				00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */,
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
@@ -577,6 +584,7 @@
 		13B07FAE1A68108700A75B9A /* inaday_app_5859 */ = {
 			isa = PBXGroup;
 			children = (
+				22E55FD922FE07D400F62CCF /* inaday_app_5859.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -591,6 +599,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				22E55FDE22FE913C00F62CCF /* UserNotifications.framework */,
+				22E55FDA22FE08FE00F62CCF /* StoreKit.framework */,
 				6F197A8022EC2BD800DB7574 /* libreact-native-fbsdk.a */,
 				6F197A7E22EC2BCD00DB7574 /* libFBSDKLoginKit.a */,
 				6F197A7C22EC2BC700DB7574 /* libFBSDKShareKit.a */,
@@ -871,6 +881,23 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 6YKR59QXKM;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 0;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1513,6 +1540,7 @@
 			baseConfigurationReference = EF85F7E5614FE36C2510D37B /* Pods-inaday_app_5859.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = inaday_app_5859/inaday_app_5859.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1551,6 +1579,7 @@
 			baseConfigurationReference = 85DAE9AF10A8904D5A6B8079 /* Pods-inaday_app_5859.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = inaday_app_5859/inaday_app_5859.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
