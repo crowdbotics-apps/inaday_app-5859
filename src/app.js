@@ -2,7 +2,7 @@ import React from "react";
 import { mapping, light } from "@eva-design/eva";
 import { ApplicationProvider, Layout, Text } from "react-native-ui-kitten";
 import { Provider as ReduxProvider } from "react-redux";
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import firebase from 'react-native-firebase';
 
 import { styles } from "./app.styles";

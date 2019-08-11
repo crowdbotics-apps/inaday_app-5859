@@ -30,7 +30,7 @@ class Main extends Component {
   _onFinishedLoadingURLSubscription = null;
   timer = null;
 
-  async componentDidMount(): void {
+  async componentDidMount() {
     this.props.navigation.addListener('willFocus', async () => {
       const uid = await AsyncStorage.getItem('@InadayStore');
       this.setState({
@@ -40,7 +40,7 @@ class Main extends Component {
       await this.getUserByUid(this.state.uid);
 
       if (this.state.playLogs && this.state.playLogs.length > 0) {
-        const timeDiff = this.getDayDiff(date.getTime(this.state.playLogs[this.state.playLogs.length -1].trackAt));
+        const timeDiff = this.getDayDiff(this.state.playLogs[this.state.playLogs.length -1].trackAt);
         if (timeDiff > 1) {
           await this.setNextPlayList();
         } else {
@@ -122,8 +122,6 @@ class Main extends Component {
 
   onTodayPlay = () =>
     new Promise((resolve) => {
-      const dt = new Date( "August 06, 2019 00:15:20" );
-      console.log(dt.getTime());
       const fileId = this.state.playLogs[this.state.playLogs.length - 1].fileId;
       const file = firebase.firestore().collection('files').doc(fileId);
       file.onSnapshot(async snapshot => {
@@ -195,6 +193,7 @@ class Main extends Component {
             await firebase.firestore().collection('users').doc(this.state.uid).set({playLogs}, {merge: true});
 
             resolve(true);
+            break;
           }
         }
 
