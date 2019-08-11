@@ -27,6 +27,9 @@ class Login extends Component {
     const { email, password } = this.state;
     if (!email.length || !password.length) {
       alert('All fields are required');
+      this.setState({
+        loaderVisible: false
+      });
       return;
     } else {
       try {
