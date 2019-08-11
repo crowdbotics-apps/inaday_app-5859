@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>195097665843-pt9oua3l5mo8e7efdjofntds8mo3rsmq.apps.googleusercontent.com</string>
+	<string>195097665843-grsc45rkch9nh5up08s6vj2vqgcnddp3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.195097665843-pt9oua3l5mo8e7efdjofntds8mo3rsmq</string>
+	<string>com.googleusercontent.apps.195097665843-grsc45rkch9nh5up08s6vj2vqgcnddp3</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCY2GORjFr8DO0-MsoLM4-UxvQS-v0FEG4</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.inaday-app-5859</string>
+	<string>com.crowdbotics.inaday</string>
 	<key>PROJECT_ID</key>
 	<string>inaday</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,7 +29,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:195097665843:ios:57ee71f3be350336</string>
+	<string>1:195097665843:ios:708c7345e30066b5</string>
 	<key>DATABASE_URL</key>
 	<string>https://inaday.firebaseio.com</string>
 </dict>
