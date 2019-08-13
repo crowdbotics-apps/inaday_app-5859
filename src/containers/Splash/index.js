@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import {CheckStore} from "../../api/auth";
+import { CheckStore } from '../../api/auth';
 
 class Splash extends Component {
   async componentDidMount() {
@@ -21,11 +21,11 @@ class Splash extends Component {
           <Image
             source={require('../../assets/images/logo.png')}
             style={styles.logo}
-            resizeMode='contain'
+            resizeMode="contain"
           />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   background: {
     backgroundColor: '#373E4C',
@@ -42,11 +42,11 @@ const styles = StyleSheet.create({
     width: '100%',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   logo: {
-    width: '40%'
-  }
+    width: '40%',
+  },
 });
 
 export default Splash;

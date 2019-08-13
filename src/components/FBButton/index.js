@@ -1,15 +1,8 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-const FBButton = ({
-  title,
-  style,
-  onPress
-}) => (
-  <TouchableOpacity
-    style={[styles.container, style]}
-    onPress={onPress}
-  >
+const FBButton = ({ title, style, onPress }) => (
+  <TouchableOpacity style={[styles.container, style]} onPress={onPress}>
     <Text style={styles.title}>{title}</Text>
   </TouchableOpacity>
 );
@@ -22,14 +15,14 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     color: '#FFFFFF',
     fontSize: 14,
     fontWeight: 'bold',
-    textTransform: 'uppercase'
-  }
-})
+    textTransform: 'uppercase',
+  },
+});
 
 export default FBButton;
