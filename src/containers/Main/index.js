@@ -113,7 +113,7 @@ class Main extends Component {
         this.setState({
           isRequiredSubscription: this.getDayDiff(userData.createdAt) > 7,
           playLogs: userData.playLogs,
-          selectedIndex: this.getDayDiff(userData.createdAt) > 7 ? 1 : 2,
+          selectedIndex: this.getDayDiff(userData.createdAt) > 7 ? 0 : 1,
         });
         // console.log(this.getDayDiff(userData.createdAt))
         resolve(userData);
