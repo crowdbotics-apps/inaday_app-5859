@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 const features = ['A new summary every day', 'Access to all summaries on-demand', 'Unlock exclusive exercises & more'];
@@ -24,60 +24,62 @@ class Subscription extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>UNLOCK ALL OF TODAY</Text>
-        <Text style={styles.subTitle}>First 7 summaries are completely FREE.</Text>
-        <Text style={styles.subContent}>Subscribe to support our amazing team in bringing positivity and wisdom to the world:</Text>
-        <View style={styles.featureContainer}>
-        {
-          features.map(f => (
-            <View
-              style={styles.feature}
-              key={f}
-            >
-              <Image
-                source={require('../../assets/images/checkmark.png')}
-                style={styles.featureIcon}
-              />
-              <Text style={styles.featureText}>{f}</Text>
-            </View>
-          ))
-        }
-        </View>
-        <TouchableOpacity
-          style={[styles.button, { marginTop: 25 }]}
-        >
-          <Text style={styles.buttonText}>SUBSCRIBE FOR $9.99/MONTH</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, { marginTop: 6 }]}
-        >
-          <Text style={styles.buttonText}>SUBSCRIBE FOR $90.99/YEAR</Text>
-        </TouchableOpacity>
-
-        <View style={styles.bottomContainer}>
-          <View style={styles.bottomBtns}>
-            <TouchableOpacity
-              onPress={this.onNavigateToAbout}
-            >
-              <Text style={styles.bottomBtnText}>Restore</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-            onPress={this.onNavigateToTerms}
-            >
-              <Text style={styles.bottomBtnText}>Terms</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={this.onNavigateToPrivacy}
-            >
-              <Text style={styles.bottomBtnText}>Privacy</Text>
-            </TouchableOpacity>
+      <ScrollView style={{flex: 1, backgroundColor: '#373E4C'}}>
+        <View style={styles.container}>
+          <Text style={styles.title}>UNLOCK ALL OF TL;DR</Text>
+          <Text style={styles.subTitle}>First 7 summaries are completely FREE.</Text>
+          <Text style={styles.subContent}>Subscribe to support our amazing team in bringing positivity and wisdom to the world:</Text>
+          <View style={styles.featureContainer}>
+          {
+            features.map(f => (
+              <View
+                style={styles.feature}
+                key={f}
+              >
+                <Image
+                  source={require('../../assets/images/checkmark.png')}
+                  style={styles.featureIcon}
+                />
+                <Text style={styles.featureText}>{f}</Text>
+              </View>
+            ))
+          }
           </View>
-          <Text style={styles.bottomText}>
-            Your subscription will automatically be renewed unless turned off in Account Settings at least 24 hours before the current period ends. Payment is charged to your iTunes account.
-          </Text>
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 25 }]}
+          >
+            <Text style={styles.buttonText}>SUBSCRIBE FOR $9.99/MONTH</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 6 }]}
+          >
+            <Text style={styles.buttonText}>SUBSCRIBE FOR $90.99/YEAR</Text>
+          </TouchableOpacity>
+
+          <View style={styles.bottomContainer}>
+            <View style={styles.bottomBtns}>
+              <TouchableOpacity
+                onPress={this.onNavigateToAbout}
+              >
+                <Text style={styles.bottomBtnText}>Restore</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+              onPress={this.onNavigateToTerms}
+              >
+                <Text style={styles.bottomBtnText}>Terms</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={this.onNavigateToPrivacy}
+              >
+                <Text style={styles.bottomBtnText}>Privacy</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.bottomText}>
+              Your subscription will automatically be renewed unless turned off in Account Settings at least 24 hours before the current period ends. Payment is charged to your iTunes account.
+            </Text>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     )
   }
 }
@@ -91,14 +93,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#373E4C'
   },
   title: {
-    marginTop: '-20%',
-    fontSize: 24,
+    marginTop: 80,
+    fontSize: 22,
     fontWeight: 'bold',
     lineHeight: 28,
-    letterSpacing: 3.2,
+    letterSpacing: 1.2,
     color: '#FFFFFF',
     textAlign: 'center',
-    marginHorizontal: 50
+    marginHorizontal: 30
   },
   subTitle: {
     marginTop: 15,
@@ -153,9 +155,8 @@ const styles = StyleSheet.create({
     color: '#FFFFFF'
   },
   bottomContainer: {
-    position: 'absolute',
-    bottom: 80,
-    display: 'flex',
+    marginTop: 40,
+    // display: 'flex',
     alignItems: 'center'
   },
   bottomBtns: {
