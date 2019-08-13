@@ -8,7 +8,7 @@ const LoginInput = ({
   value,
   onChangeText,
   keyboardType = 'default',
-  autoCapitalize = 'words'
+  autoCapitalize = 'words',
 }) => (
   <TextInput
     style={[styles.inputContainer, style]}
@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
     borderRadius: 12,
     fontSize: 15,
-    fontWeight: '600'
-  }
-})
+    fontWeight: '600',
+  },
+});
 
 export default LoginInput;

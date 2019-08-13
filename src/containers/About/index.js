@@ -1,79 +1,73 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
-import SettingButton from '../../components/SettingButton';
+import {
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  Alert,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import Loader from '../../components/Loader';
-import LoginButton from "../../components/LoginButton";
-import {Logout} from '../../api/auth';
+import LoginButton from '../../components/LoginButton';
+import { Logout } from '../../api/auth';
 
 const { height } = Dimensions.get('screen');
 class About extends Component {
   state = {
-    loaderVisible: false
-  }
+    loaderVisible: false,
+  };
 
   onNavigateToTerms = () => {
     this.props.navigation.navigate('terms');
-  }
+  };
 
   onLogOut = async () => {
     try {
       await Logout();
       this.props.navigation.navigate('login');
-
     } catch (error) {
-      alert(error.message);
+      Alert.alert(error.message);
     }
-  }
+  };
 
   render() {
     const { loaderVisible } = this.state;
     const { goBack } = this.props.navigation;
 
-    const terms = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sem nulla, lacinia ut nisl sed, mollis dignissim risus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin sollicitudin leo in semper hendrerit. Pellentesque congue metus ex, et posuere lacus iaculis at. Integer molestie sodales cursus. Sed lacinia blandit odio, eu vehicula metus posuere at. Morbi vel arcu purus. Pellentesque massa quam, tristique placerat molestie at, efficitur ut sapien. Phasellus augue risus, aliquam et nibh vitae, mattis consectetur massa. Proin hendrerit commodo nisl quis sagittis.\n\n' +
-    'Vivamus feugiat est eu fermentum mattis. Vestibulum mattis mollis justo ut pharetra. Morbi tincidunt interdum urna, ac pretium quam vulputate non. Duis ante ligula, sodales non mollis non, semper ut mauris. Donec nec nisl aliquet ipsum scelerisque tristique ac non nunc. Curabitur varius auctor sem, quis venenatis augue gravida ut. Nullam tempus tortor eget mauris efficitur finibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam quis quam vitae elit consequat aliquam. In nec quam eget ante sollicitudin blandit. Fusce vitae purus ut sapien viverra mollis eu vitae turpis.';
+    const terms =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sem nulla, lacinia ut nisl sed, mollis dignissim risus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin sollicitudin leo in semper hendrerit. Pellentesque congue metus ex, et posuere lacus iaculis at. Integer molestie sodales cursus. Sed lacinia blandit odio, eu vehicula metus posuere at. Morbi vel arcu purus. Pellentesque massa quam, tristique placerat molestie at, efficitur ut sapien. Phasellus augue risus, aliquam et nibh vitae, mattis consectetur massa. Proin hendrerit commodo nisl quis sagittis.\n\n' +
+      'Vivamus feugiat est eu fermentum mattis. Vestibulum mattis mollis justo ut pharetra. Morbi tincidunt interdum urna, ac pretium quam vulputate non. Duis ante ligula, sodales non mollis non, semper ut mauris. Donec nec nisl aliquet ipsum scelerisque tristique ac non nunc. Curabitur varius auctor sem, quis venenatis augue gravida ut. Nullam tempus tortor eget mauris efficitur finibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam quis quam vitae elit consequat aliquam. In nec quam eget ante sollicitudin blandit. Fusce vitae purus ut sapien viverra mollis eu vitae turpis.';
 
     return (
       <View style={styles.container}>
         <View style={styles.background}>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => goBack()}
-          >
+          <TouchableOpacity style={styles.backButton} onPress={() => goBack()}>
             <Image
               source={require('../../assets/icons/backIcon.png')}
               style={styles.backButtonImg}
-              resizeMode='contain'
+              resizeMode="contain"
             />
           </TouchableOpacity>
-          <Text
-            style={styles.topText}
-          >ABOUT</Text>
-          <Text
-            style={styles.topDescription}
-          >{terms}</Text>
+          <Text style={styles.topText}>ABOUT</Text>
+          <Text style={styles.topDescription}>{terms}</Text>
           <LoginButton
             title="LOG OUT"
-            style={{ marginTop: height * 5 / 100 }}
-            onPress={ this.onLogOut}
+            style={{ marginTop: (height * 5) / 100 }}
+            onPress={this.onLogOut}
           />
           <View style={styles.termContainer}>
-            <TouchableOpacity
-              onPress={this.onNavigateToTerms}
-            >
-              <Text
-                style={styles.desc}
-              >Terms</Text>
+            <TouchableOpacity onPress={this.onNavigateToTerms}>
+              <Text style={styles.desc}>Terms</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainer}>
             <Text style={styles.logoText}>© 2019 Inaday</Text>
           </View>
-          <Loader
-            visible={loaderVisible}
-          />
+          <Loader visible={loaderVisible} />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -86,7 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    position: 'relative'
+    position: 'relative',
   },
   background: {
     height: '100%',
@@ -94,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#373E4C',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   backButton: {
     position: 'absolute',
@@ -106,7 +100,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     justifyContent: 'flex-start',
     width: 20,
-    height: 20
+    height: 20,
   },
   bottomContainer: {
     flex: 1,
@@ -123,16 +117,16 @@ const styles = StyleSheet.create({
   },
   logoText: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.6)'
+    color: 'rgba(255, 255, 255, 0.6)',
   },
   topText: {
     fontSize: 25,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    marginTop: '30%'
+    marginTop: '30%',
   },
   topDescription: {
-    marginTop: height * 2.5 / 100,
+    marginTop: (height * 2.5) / 100,
     marginLeft: 10,
     width: '95%',
     fontSize: 14,
@@ -142,7 +136,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   termContainer: {
-    marginTop: height * 6.5 / 100,
+    marginTop: (height * 6.5) / 100,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -151,8 +145,8 @@ const styles = StyleSheet.create({
   termText: {
     width: 80,
     margin: 'auto',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 export default About;

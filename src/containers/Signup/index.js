@@ -1,5 +1,14 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, { Component } from 'react';
-import { View, Image, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import {
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  Alert,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import LoginInput from '../../components/LoginInput';
 import LoginButton from '../../components/LoginButton';
 import FBButton from '../../components/FBButton';
@@ -11,58 +20,58 @@ class Signup extends Component {
   state = {
     email: '',
     password: '',
-    loaderVisible: false
-  }
+    loaderVisible: false,
+  };
 
   onChangeText = type => value => {
     this.setState({
-      [type]: value
+      [type]: value,
     });
-  }
+  };
 
   onSignUp = async () => {
     const { email, password } = this.state;
     if (!email.length || !password.length) {
-      alert('All fields are required');
+      Alert.alert('All fields are required');
       return;
     } else {
       try {
         this.setState({
-          loaderVisible: true
+          loaderVisible: true,
         });
         await signUp(email, password);
         this.props.navigation.navigate('main');
       } catch (error) {
-        alert(error.message);
+        Alert.alert(error.message);
       }
     }
     this.setState({
-      loaderVisible: false
+      loaderVisible: false,
     });
-  }
+  };
 
   onSignUpFacebook = async () => {
     this.setState({
-      loaderVisible: true
+      loaderVisible: true,
     });
     try {
       await signInWithFacebook();
       this.props.navigation.navigate('main');
     } catch (error) {
-      alert(error.message);
+      Alert.alert(error.message);
     }
     this.setState({
-      loaderVisible: false
+      loaderVisible: false,
     });
-  }
+  };
 
   onNavigateToSignIn = () => {
     this.props.navigation.navigate('login');
-  }
+  };
 
   onNavigateToTerms = () => {
     this.props.navigation.navigate('terms');
-  }
+  };
 
   render() {
     const { email, password, loaderVisible } = this.state;
@@ -72,15 +81,15 @@ class Signup extends Component {
           <Image
             source={require('../../assets/images/logo.png')}
             style={styles.logo}
-            resizeMode='contain'
+            resizeMode="contain"
           />
           <LoginInput
             value={email}
             onChangeText={this.onChangeText('email')}
             placeholder="Email"
-            style={{ marginTop: height * 6.5 / 100 }}
-            keyboardType='email-address'
-            autoCapitalize='none'
+            style={{ marginTop: (height * 6.5) / 100 }}
+            keyboardType="email-address"
+            autoCapitalize="none"
           />
           <LoginInput
             value={password}
@@ -96,7 +105,7 @@ class Signup extends Component {
           />
           <FBButton
             title="SIGN UP WITH FACEBOOK"
-            style={{ marginTop: height * 6.5 / 100 }}
+            style={{ marginTop: (height * 6.5) / 100 }}
             onPress={this.onSignUpFacebook}
           />
           <View style={styles.singInContainer}>
@@ -105,27 +114,24 @@ class Signup extends Component {
               style={{ marginLeft: 2 }}
               onPress={this.onNavigateToSignIn}
             >
-              <Text style={[styles.desc, { fontWeight: 'bold' }]}> Sign in now</Text>
+              <Text style={[styles.desc, { fontWeight: 'bold' }]}>
+                {' '}
+                Sign in now
+              </Text>
             </TouchableOpacity>
           </View>
           <View style={styles.termContainer}>
-            <TouchableOpacity
-              onPress={this.onNavigateToTerms}
-            >
-              <Text
-                style={styles.desc}
-              >Terms</Text>
+            <TouchableOpacity onPress={this.onNavigateToTerms}>
+              <Text style={styles.desc}>Terms</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainer}>
             <Text style={styles.logoText}>© 2019 Inaday</Text>
           </View>
-          <Loader
-            visible={loaderVisible}
-          />
+          <Loader visible={loaderVisible} />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -138,7 +144,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    position: 'relative'
+    position: 'relative',
   },
   background: {
     height: '100%',
@@ -146,23 +152,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#373E4C',
     flex: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   logo: {
     height: '16%',
-    marginTop: '35%'
+    marginTop: '35%',
   },
   singInContainer: {
     marginTop: 15,
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   desc: {
     fontSize: 15,
     fontWeight: 'normal',
     color: '#FFFFFF',
-    letterSpacing: -0.5
+    letterSpacing: -0.5,
   },
   bottomContainer: {
     flex: 1,
@@ -173,10 +179,10 @@ const styles = StyleSheet.create({
   },
   logoText: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.6)'
+    color: 'rgba(255, 255, 255, 0.6)',
   },
   termContainer: {
-    marginTop: height * 6.5 / 100,
+    marginTop: (height * 6.5) / 100,
     display: 'flex',
     alignItems: 'center',
   },
