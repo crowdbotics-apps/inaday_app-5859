@@ -8,15 +8,15 @@ import {
   Alert,
   TouchableOpacity,
   Dimensions,
-  AsyncStorage
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import SoundPlayer from "react-native-sound-player";
+import firebase from "react-native-firebase";
 import LoginInput from '../../components/LoginInput';
 import LoginButton from '../../components/LoginButton';
 import FBButton from '../../components/FBButton';
 import { signUp, signInWithFacebook } from '../../api/auth';
 import Loader from '../../components/Loader';
-import SoundPlayer from "react-native-sound-player";
-import firebase from "react-native-firebase";
 
 const { height } = Dimensions.get('screen');
 class Signup extends Component {

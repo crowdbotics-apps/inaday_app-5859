@@ -6,7 +6,7 @@ import {
   Text,
   Alert,
   TouchableOpacity,
-  Dimensions,
+  Dimensions, ScrollView,
 } from 'react-native';
 import Loader from '../../components/Loader';
 import LoginButton from '../../components/LoginButton';
@@ -57,70 +57,73 @@ class Setting extends Component {
     const { loaderVisible } = this.state;
     const { goBack } = this.props.navigation;
     const terms = 'Welcome to the beta version of TL;DR!\n' +
-      'Our mission is to bridge the gap between the busy world of work and the brilliant world of books. ' +
-      'Throughout the many ups and downs in our careers, books have been there as pillars of wisdom and hope. We hope they’ll be the same for you. ' +
-      'We bring you entertaining, inspirational book summaries to accelerate careers and companies. At about 5 minutes each, you can listen on the way to work, on your lunch break, or any time you need a boost. ' +
-      'You’ll find that each summary is sprinkled with humor, story, and music. ' +
-      'We’re big believers in the mantra, “If it’s not fun, you’re not doing it right!”\n' +
-      'As part of the beta, each day you’ll get a new summary. Day 1 is Shoe Dog, the story of how Phil Knight and Nike put shoes on the world’s feet. ' +
-      'The beta is just a taste of what’s to come.\n' +
+      'Our mission is to bridge the gap between the busy world of work and the brilliant world of books.\n\n' +
+      'Throughout the many ups and downs in our careers, books have been there as pillars of wisdom and hope. We hope they’ll be the same for you.\n\n' +
+      'We bring you entertaining, inspirational book summaries to accelerate careers and companies. At about 5 minutes each, you can listen on the way to work, on your lunch break, or any time you need a boost.\n\n' +
+      'You’ll find that each summary is sprinkled with humor, story, and music.\n\n' +
+      'We’re big believers in the mantra, “If it’s not fun, you’re not doing it right!”\n\n' +
+      'As part of the beta, each day you’ll get a new summary. Day 1 is Shoe Dog, the story of how Phil Knight and Nike put shoes on the world’s feet.\n\n' +
+      'The beta is just a taste of what’s to come.\n\n' +
       'Enjoy!\n\n' +
       'Email our team at team@hellotldr.com to discuss job openings, partnerships, questions, or ideas.';
 
     return (
-      <View style={styles.container}>
-        <View style={styles.background}>
-          {/*<TouchableOpacity*/}
-          {/*  style={styles.backButton}*/}
-          {/*  onPress={this.onNavigateToMain}*/}
-          {/*>*/}
-          {/*  <Image*/}
-          {/*    source={require('../../assets/icons/backIcon.png')}*/}
-          {/*    style={styles.backButtonImg}*/}
-          {/*    resizeMode='contain'*/}
-          {/*  />*/}
-          {/*</TouchableOpacity>*/}
-          {/*<Text*/}
-          {/*  style={styles.topText}*/}
-          {/*>BASIC PLAN</Text>*/}
-          {/*<Text*/}
-          {/*  style={styles.topDescription}*/}
-          {/*>Your subscription will automatically be renewed unless turned off in Account Settings at least 24 hours before the current period ends. Payment is charged to your iTunes account.</Text>*/}
-          {/*<SettingButton*/}
-          {/*  title="UPGRADE FOR $9.99/MONTH"*/}
-          {/*  style={{ marginTop: height * 4.5 / 100 }}*/}
-          {/*  onPress={this.onUpgradeMonth}*/}
-          {/*/>*/}
-          {/*<SettingButton*/}
-          {/*  title="UPGRADE FOR $99.99/YEAR"*/}
-          {/*  style={{ marginTop: height * 0.01 }}*/}
-          {/*  onPress={this.onUpgradeYear}*/}
-          {/*/>*/}
-          <TouchableOpacity style={styles.backButton} onPress={() => goBack()}>
-            <Image
-              source={require('../../assets/icons/backIcon.png')}
-              style={styles.backButtonImg}
-              resizeMode="contain"
-            />
-          </TouchableOpacity>
-          <Text style={styles.topText}>ABOUT</Text>
-          <Text style={styles.topDescription}>{terms}</Text>
-          <LoginButton
-            title="LOG OUT"
-            style={{ marginTop: (height * 5) / 100 }}
-            onPress={this.onLogOut}
-          />
-          <View style={styles.termContainer}>
-            <TouchableOpacity onPress={this.onNavigateToTerms}>
-              <Text style={styles.desc}>Terms</Text>
+      <ScrollView style={{ flex: 1, backgroundColor: '#373E4C' }}>
+        <View style={styles.container}>
+          <View style={styles.background}>
+            {/*<TouchableOpacity*/}
+            {/*  style={styles.backButton}*/}
+            {/*  onPress={this.onNavigateToMain}*/}
+            {/*>*/}
+            {/*  <Image*/}
+            {/*    source={require('../../assets/icons/backIcon.png')}*/}
+            {/*    style={styles.backButtonImg}*/}
+            {/*    resizeMode='contain'*/}
+            {/*  />*/}
+            {/*</TouchableOpacity>*/}
+            {/*<Text*/}
+            {/*  style={styles.topText}*/}
+            {/*>BASIC PLAN</Text>*/}
+            {/*<Text*/}
+            {/*  style={styles.topDescription}*/}
+            {/*>Your subscription will automatically be renewed unless turned off in Account Settings at least 24 hours before the current period ends. Payment is charged to your iTunes account.</Text>*/}
+            {/*<SettingButton*/}
+            {/*  title="UPGRADE FOR $9.99/MONTH"*/}
+            {/*  style={{ marginTop: height * 4.5 / 100 }}*/}
+            {/*  onPress={this.onUpgradeMonth}*/}
+            {/*/>*/}
+            {/*<SettingButton*/}
+            {/*  title="UPGRADE FOR $99.99/YEAR"*/}
+            {/*  style={{ marginTop: height * 0.01 }}*/}
+            {/*  onPress={this.onUpgradeYear}*/}
+            {/*/>*/}
+            <TouchableOpacity style={styles.backButton} onPress={() => goBack()}>
+              <Image
+                source={require('../../assets/icons/backIcon.png')}
+                style={styles.backButtonImg}
+                resizeMode="contain"
+              />
             </TouchableOpacity>
+            <Text style={styles.topText}>ABOUT</Text>
+            <Text style={styles.topDescription}>{terms}</Text>
+            <LoginButton
+              title="LOG OUT"
+              style={{ marginTop: (height * 5) / 100 }}
+              onPress={this.onLogOut}
+            />
+            <View style={styles.termContainer}>
+              <TouchableOpacity onPress={this.onNavigateToTerms}>
+                <Text style={styles.desc}>Terms</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.bottomContainer}>
+              <Text style={styles.logoText}>© 2019 Inaday</Text>
+            </View>
+            <Loader visible={loaderVisible} />
           </View>
-          <View style={styles.bottomContainer}>
-            <Text style={styles.logoText}>© 2019 Inaday</Text>
-          </View>
-          <Loader visible={loaderVisible} />
         </View>
-      </View>
+      </ScrollView>
+
     );
   }
 }
@@ -187,7 +190,8 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
     color: '#FFFFFF',
     letterSpacing: -0.2,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
+    textAlign: 'center',
   },
   termContainer: {
     marginTop: (height * 6.5) / 100,

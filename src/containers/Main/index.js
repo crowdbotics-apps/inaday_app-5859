@@ -6,7 +6,7 @@ import Swiper from 'react-native-swiper';
 import SoundPlayer from 'react-native-sound-player';
 import firebase from 'react-native-firebase';
 import DayComponent from '../../components/DayComponent';
-import Subscription from '../../components/Subscription';
+// import Subscription from '../../components/Subscription';
 import AsyncStorage from '@react-native-community/async-storage';
 
 let date = new Date();
