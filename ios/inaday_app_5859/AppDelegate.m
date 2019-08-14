@@ -20,12 +20,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+
   [FIRApp configure];
   [[FBSDKApplicationDelegate sharedInstance] application:application
                            didFinishLaunchingWithOptions:launchOptions];
+
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+
   [RNFirebaseNotifications configure];
-  
+
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                     moduleName:@"inaday_app_5859"
