@@ -34,6 +34,7 @@ class Main extends Component {
 
   async componentDidMount() {
     this.props.navigation.addListener('willFocus', async () => {
+      this.setState(initialState);
       const uid = await AsyncStorage.getItem('@InadayStore');
       this.setState({
         uid,
@@ -76,6 +77,7 @@ class Main extends Component {
           );
 
           SoundPlayer.loadUrl(this.state.file.url);
+
           this.timer = setInterval(async () => {
             if (this.state.isPlaying) {
               if (this.state.current >= this.state.duration) {
@@ -83,6 +85,7 @@ class Main extends Component {
                 SoundPlayer.seek(0);
                 this.setState({
                   isPlaying: false,
+                  isReady: false,
                 });
               } else {
                 const info = await SoundPlayer.getInfo();
@@ -91,7 +94,8 @@ class Main extends Component {
                 });
               }
             }
-          }, 100);
+          }, 500);
+          // await this.onPlay();
         }
 
         return true;
@@ -178,7 +182,6 @@ class Main extends Component {
                 fileId: file.id,
                 trackAt: date.getTime(),
               },
-              ,
             ],
           },
           {
@@ -193,8 +196,6 @@ class Main extends Component {
   setNextPlayList = () =>
     new Promise(resolve => {
       // get first file's info order by `order number`
-      const dt = new Date('August 06, 2019 00:15:20');
-      console.log('next: ', dt.getTime());
       let playerRef = firebase
         .firestore()
         .collection('files')
@@ -259,50 +260,63 @@ class Main extends Component {
     const { selectedIndex, isPlaying, isReady, current, duration } = this.state;
     return (
       <View style={styles.container}>
-        {this.state.isRequiredSubscription ? (
-          <Swiper
-            loop={false}
-            autoplay={false}
-            showsButtons={false}
-            paginationStyle={{ marginBottom: 30 }}
-            dot={<View style={styles.dot} />}
-            activeDot={<View style={styles.activeDot} />}
-            index={selectedIndex}
-            onIndexChanged={this.onIndexChanged}
-          >
-            <View style={{ flex: 1 }}>
-              <Subscription />
-            </View>
-          </Swiper>
-        ) : (
-          <Swiper
-            loop={false}
-            autoplay={false}
-            showsButtons={false}
-            paginationStyle={{ marginBottom: 30 }}
-            dot={<View style={styles.dot} />}
-            activeDot={<View style={styles.activeDot} />}
-            index={selectedIndex}
-            onIndexChanged={this.onIndexChanged}
-          >
-            <View style={{ flex: 1 }}>
-              <Subscription />
-            </View>
-            <View style={styles.dayContainer}>
-              {this.state.file.url && (
-                <DayComponent
-                  day="TODAY"
-                  title={this.state.file.name}
-                  isPlaying={isPlaying}
-                  isReady={isReady}
-                  current={current}
-                  duration={duration}
-                  onPlay={this.onPlay}
-                />
-              )}
-            </View>
-          </Swiper>
-        )}
+        <View style={styles.dayContainer}>
+          {this.state.file.url && (
+            <DayComponent
+              day="TODAY"
+              title={this.state.file.name}
+              isPlaying={isPlaying}
+              isReady={isReady}
+              current={current}
+              duration={duration}
+              onPlay={this.onPlay}
+            />
+          )}
+        </View>
+        {/*{this.state.isRequiredSubscription ? (*/}
+        {/*  <Swiper*/}
+        {/*    loop={false}*/}
+        {/*    autoplay={false}*/}
+        {/*    showsButtons={false}*/}
+        {/*    paginationStyle={{ marginBottom: 30 }}*/}
+        {/*    dot={<View style={styles.dot} />}*/}
+        {/*    activeDot={<View style={styles.activeDot} />}*/}
+        {/*    index={selectedIndex}*/}
+        {/*    onIndexChanged={this.onIndexChanged}*/}
+        {/*  >*/}
+        {/*    <View style={{ flex: 1 }}>*/}
+        {/*      <Subscription />*/}
+        {/*    </View>*/}
+        {/*  </Swiper>*/}
+        {/*) : (*/}
+        {/*  <Swiper*/}
+        {/*    loop={false}*/}
+        {/*    autoplay={false}*/}
+        {/*    showsButtons={false}*/}
+        {/*    paginationStyle={{ marginBottom: 30 }}*/}
+        {/*    dot={<View style={styles.dot} />}*/}
+        {/*    activeDot={<View style={styles.activeDot} />}*/}
+        {/*    index={selectedIndex}*/}
+        {/*    onIndexChanged={this.onIndexChanged}*/}
+        {/*  >*/}
+        {/*    <View style={{ flex: 1 }}>*/}
+        {/*      <Subscription />*/}
+        {/*    </View>*/}
+        {/*    <View style={styles.dayContainer}>*/}
+        {/*      {this.state.file.url && (*/}
+        {/*        <DayComponent*/}
+        {/*          day="TODAY"*/}
+        {/*          title={this.state.file.name}*/}
+        {/*          isPlaying={isPlaying}*/}
+        {/*          isReady={isReady}*/}
+        {/*          current={current}*/}
+        {/*          duration={duration}*/}
+        {/*          onPlay={this.onPlay}*/}
+        {/*        />*/}
+        {/*      )}*/}
+        {/*    </View>*/}
+        {/*  </Swiper>*/}
+        {/*)}*/}
         <TouchableOpacity
           style={styles.settingsBtn}
           onPress={this.onNavigateToSetting}

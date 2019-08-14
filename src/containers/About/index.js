@@ -35,9 +35,16 @@ class About extends Component {
     const { loaderVisible } = this.state;
     const { goBack } = this.props.navigation;
 
-    const terms =
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sem nulla, lacinia ut nisl sed, mollis dignissim risus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin sollicitudin leo in semper hendrerit. Pellentesque congue metus ex, et posuere lacus iaculis at. Integer molestie sodales cursus. Sed lacinia blandit odio, eu vehicula metus posuere at. Morbi vel arcu purus. Pellentesque massa quam, tristique placerat molestie at, efficitur ut sapien. Phasellus augue risus, aliquam et nibh vitae, mattis consectetur massa. Proin hendrerit commodo nisl quis sagittis.\n\n' +
-      'Vivamus feugiat est eu fermentum mattis. Vestibulum mattis mollis justo ut pharetra. Morbi tincidunt interdum urna, ac pretium quam vulputate non. Duis ante ligula, sodales non mollis non, semper ut mauris. Donec nec nisl aliquet ipsum scelerisque tristique ac non nunc. Curabitur varius auctor sem, quis venenatis augue gravida ut. Nullam tempus tortor eget mauris efficitur finibus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aliquam quis quam vitae elit consequat aliquam. In nec quam eget ante sollicitudin blandit. Fusce vitae purus ut sapien viverra mollis eu vitae turpis.';
+    const terms = 'Welcome to the beta version of TL;DR!\n' +
+      'Our mission is to bridge the gap between the busy world of work and the brilliant world of books.\n' +
+      'Throughout the many ups and downs in our careers, books have been there as pillars of wisdom and hope. We hope they’ll be the same for you.\n' +
+      'We bring you entertaining, inspirational book summaries to accelerate careers and companies. At about 5 minutes each, you can listen on the way to work, on your lunch break, or any time you need a boost.\n' +
+      'You’ll find that each summary is sprinkled with humor, story, and music.\n' +
+      'We’re big believers in the mantra, “If it’s not fun, you’re not doing it right!”\n' +
+      'As part of the beta, each day you’ll get a new summary. Day 1 is Shoe Dog, the story of how Phil Knight and Nike put shoes on the world’s feet.\n' +
+      'The beta is just a taste of what’s to come.\n' +
+      'Enjoy!\n' +
+      'Email our team at team@hellotldr.com to discuss job openings, partnerships, questions, or ideas.';
 
     return (
       <View style={styles.container}>
