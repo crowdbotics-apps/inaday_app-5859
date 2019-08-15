@@ -22,6 +22,13 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1C1059738FC7426BB32D7878 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46CA51F6F101442A9FB64E55 /* Roboto-Regular.ttf */; };
+		22BB88802304F888002D6397 /* 4-The_80-20_Principle_Book_Summary_Final.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22BB88792304F888002D6397 /* 4-The_80-20_Principle_Book_Summary_Final.m4a */; };
+		22BB88812304F888002D6397 /* 2-Atomic_Habits_Book_Summary_Final.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22BB887A2304F888002D6397 /* 2-Atomic_Habits_Book_Summary_Final.m4a */; };
+		22BB88822304F888002D6397 /* 3-The_Magic_of_Big_Thinking_Book_Summary_Final.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22BB887B2304F888002D6397 /* 3-The_Magic_of_Big_Thinking_Book_Summary_Final.m4a */; };
+		22BB88832304F888002D6397 /* 6-Radical_Candor_Book_Summary_Final.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22BB887C2304F888002D6397 /* 6-Radical_Candor_Book_Summary_Final.m4a */; };
+		22BB88842304F888002D6397 /* 5-The_War_of_Art_Book_Summary.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 22BB887D2304F888002D6397 /* 5-The_War_of_Art_Book_Summary.m4a */; };
+		22BB88852304F888002D6397 /* 1-Shoe_Dog_Book_Summary.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 22BB887E2304F888002D6397 /* 1-Shoe_Dog_Book_Summary.mp3 */; };
+		22BB88862304F888002D6397 /* 7-Grinding_It_Out_Book_Summary_Final.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 22BB887F2304F888002D6397 /* 7-Grinding_It_Out_Book_Summary_Final.mp3 */; };
 		22E55FDB22FE08FE00F62CCF /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E55FDA22FE08FE00F62CCF /* StoreKit.framework */; };
 		22E55FDF22FE913C00F62CCF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E55FDE22FE913C00F62CCF /* UserNotifications.framework */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -398,6 +405,13 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = inaday_app_5859/main.m; sourceTree = "<group>"; };
 		1AA370A9D7D24D3C873AE3C0 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		2174FFF0E4D24D60830DBD51 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		22BB88792304F888002D6397 /* 4-The_80-20_Principle_Book_Summary_Final.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "4-The_80-20_Principle_Book_Summary_Final.m4a"; path = "../../../../workspace/crowdbotics/TLDR/4-The_80-20_Principle_Book_Summary_Final.m4a"; sourceTree = "<group>"; };
+		22BB887A2304F888002D6397 /* 2-Atomic_Habits_Book_Summary_Final.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "2-Atomic_Habits_Book_Summary_Final.m4a"; path = "../../../../workspace/crowdbotics/TLDR/2-Atomic_Habits_Book_Summary_Final.m4a"; sourceTree = "<group>"; };
+		22BB887B2304F888002D6397 /* 3-The_Magic_of_Big_Thinking_Book_Summary_Final.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "3-The_Magic_of_Big_Thinking_Book_Summary_Final.m4a"; path = "../../../../workspace/crowdbotics/TLDR/3-The_Magic_of_Big_Thinking_Book_Summary_Final.m4a"; sourceTree = "<group>"; };
+		22BB887C2304F888002D6397 /* 6-Radical_Candor_Book_Summary_Final.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "6-Radical_Candor_Book_Summary_Final.m4a"; path = "../../../../workspace/crowdbotics/TLDR/6-Radical_Candor_Book_Summary_Final.m4a"; sourceTree = "<group>"; };
+		22BB887D2304F888002D6397 /* 5-The_War_of_Art_Book_Summary.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = "5-The_War_of_Art_Book_Summary.m4a"; path = "../../../../workspace/crowdbotics/TLDR/5-The_War_of_Art_Book_Summary.m4a"; sourceTree = "<group>"; };
+		22BB887E2304F888002D6397 /* 1-Shoe_Dog_Book_Summary.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "1-Shoe_Dog_Book_Summary.mp3"; path = "../../../../workspace/crowdbotics/TLDR/1-Shoe_Dog_Book_Summary.mp3"; sourceTree = "<group>"; };
+		22BB887F2304F888002D6397 /* 7-Grinding_It_Out_Book_Summary_Final.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "7-Grinding_It_Out_Book_Summary_Final.mp3"; path = "../../../../workspace/crowdbotics/TLDR/7-Grinding_It_Out_Book_Summary_Final.mp3"; sourceTree = "<group>"; };
 		22E55FD922FE07D400F62CCF /* inaday_app_5859.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = inaday_app_5859.entitlements; path = inaday_app_5859/inaday_app_5859.entitlements; sourceTree = "<group>"; };
 		22E55FDA22FE08FE00F62CCF /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		22E55FDE22FE913C00F62CCF /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
@@ -584,6 +598,13 @@
 		13B07FAE1A68108700A75B9A /* inaday_app_5859 */ = {
 			isa = PBXGroup;
 			children = (
+				22BB887E2304F888002D6397 /* 1-Shoe_Dog_Book_Summary.mp3 */,
+				22BB887A2304F888002D6397 /* 2-Atomic_Habits_Book_Summary_Final.m4a */,
+				22BB887B2304F888002D6397 /* 3-The_Magic_of_Big_Thinking_Book_Summary_Final.m4a */,
+				22BB88792304F888002D6397 /* 4-The_80-20_Principle_Book_Summary_Final.m4a */,
+				22BB887D2304F888002D6397 /* 5-The_War_of_Art_Book_Summary.m4a */,
+				22BB887C2304F888002D6397 /* 6-Radical_Candor_Book_Summary_Final.m4a */,
+				22BB887F2304F888002D6397 /* 7-Grinding_It_Out_Book_Summary_Final.mp3 */,
 				22E55FD922FE07D400F62CCF /* inaday_app_5859.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -881,7 +902,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 6YKR59QXKM;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
 								enabled = 0;
@@ -1321,11 +1342,18 @@
 				B3942E2E59914D52B2B04934 /* fontawesome.ttf in Resources */,
 				8548D5EBE53D446990E5058A /* icomoon.ttf in Resources */,
 				855F17B3CF8341B0B5C59BFE /* Righteous-Regular.ttf in Resources */,
+				22BB88862304F888002D6397 /* 7-Grinding_It_Out_Book_Summary_Final.mp3 in Resources */,
 				B4AB46B5826E43F1909DB22D /* Roboto-Bold.ttf in Resources */,
+				22BB88832304F888002D6397 /* 6-Radical_Candor_Book_Summary_Final.m4a in Resources */,
+				22BB88842304F888002D6397 /* 5-The_War_of_Art_Book_Summary.m4a in Resources */,
 				FCB40F03B3D44902AC088398 /* Roboto-Light.ttf in Resources */,
+				22BB88852304F888002D6397 /* 1-Shoe_Dog_Book_Summary.mp3 in Resources */,
 				49D30DA222DFBAC6006A0464 /* GoogleService-Info.plist in Resources */,
+				22BB88812304F888002D6397 /* 2-Atomic_Habits_Book_Summary_Final.m4a in Resources */,
 				CA5871B3A4B646C59D1B9F49 /* Roboto-Medium.ttf in Resources */,
+				22BB88822304F888002D6397 /* 3-The_Magic_of_Big_Thinking_Book_Summary_Final.m4a in Resources */,
 				1C1059738FC7426BB32D7878 /* Roboto-Regular.ttf in Resources */,
+				22BB88802304F888002D6397 /* 4-The_80-20_Principle_Book_Summary_Final.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1549,11 +1577,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = inaday_app_5859/inaday_app_5859.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6YKR59QXKM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
@@ -1577,7 +1605,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.inaday;
 				PRODUCT_NAME = inaday_app_5859;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = inaday24/7/19;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1588,10 +1616,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = inaday_app_5859/inaday_app_5859.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6YKR59QXKM;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/FirebaseAnalytics/Frameworks\"",
@@ -1615,7 +1643,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.crowdbotics.inaday;
 				PRODUCT_NAME = inaday_app_5859;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = inaday24/7/19;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

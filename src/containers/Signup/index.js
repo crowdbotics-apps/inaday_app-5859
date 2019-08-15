@@ -26,39 +26,6 @@ class Signup extends Component {
     loaderVisible: false,
   };
 
-  async componentWillMount () {
-    await this.setInitPlayList();
-
-    SoundPlayer.addEventListener(
-      'FinishedLoadingURL',
-      async ({ success, url }) => {
-        if (success) {
-          console.log('download finished')
-          AsyncStorage.setItem(`${url}`, true)
-        }
-      });
-  }
-
-
-  setInitPlayList = async () => {
-    let firstPlayerRef = await firebase
-      .firestore()
-      .collection('files')
-      .orderBy('order', 'asc')
-      .limit(1);
-    await firstPlayerRef.get().then(async snapshot => {
-      let file = await snapshot.docs[0].data();
-      console.log(file);
-      let downloaded = AsyncStorage.getItem(`${file.url}`);
-      if (!downloaded) {
-        console.log('file is not downloaded');
-        await SoundPlayer.loadUrl(file.url);
-      } else  {
-        console.log('file is downloaded')
-      }
-    });
-  };
-
   onChangeText = type => value => {
     this.setState({
       [type]: value,

@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-sparse-arrays */
-import React, { Component } from 'react';
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import React, {Component} from 'react';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import Swiper from 'react-native-swiper';
 import SoundPlayer from 'react-native-sound-player';
 import firebase from 'react-native-firebase';
+import AsyncStorage from '@react-native-community/async-storage';
 import DayComponent from '../../components/DayComponent';
 // import Subscription from '../../components/Subscription';
-import AsyncStorage from '@react-native-community/async-storage';
 
 let date = new Date();
 const initialState = {
@@ -19,8 +19,40 @@ const initialState = {
   file: {},
   playLogs: [],
   selectedIndex: 0,
+  todayOrder: 0,
   uid: null,
 };
+
+const files = [
+  {
+    name: '1-Shoe_Dog_Book_Summary',
+    type: 'mp3',
+  },
+  {
+    name: '2-Atomic_Habits_Book_Summary_Final',
+    type: 'm4a',
+  },
+  {
+    name: '3-The_Magic_of_Big_Thinking_Book_Summary_Final',
+    type: 'm4a',
+  },
+  {
+    name: '4-The_80-20_Principle_Book_Summary_Final',
+    type: 'm4a',
+  },
+  {
+    name: '5-The_War_of_Art_Book_Summary',
+    type: 'm4a',
+  },
+  {
+    name: '6-Radical_Candor_Book_Summary_Final',
+    type: 'm4a',
+  },
+  {
+    name: '7-Grinding_It_Out_Book_Summary_Final',
+    type: 'mp3',
+  },
+];
 
 class Main extends Component {
   constructor(props) {
@@ -30,6 +62,7 @@ class Main extends Component {
 
   _onFinishedPlayingSubscription = null;
   _onFinishedLoadingURLSubscription = null;
+  _onFinishedLoadingFileSubscription = null;
   timer = null;
 
   async componentDidMount() {
@@ -43,6 +76,9 @@ class Main extends Component {
       await this.getUserByUid(this.state.uid);
 
       if (this.state.playLogs && this.state.playLogs.length > 0) {
+        this.setState({
+          todayOrder: this.state.playLogs[this.state.playLogs.length - 1].order,
+        });
         const timeDiff = this.getDayDiff(
           this.state.playLogs[this.state.playLogs.length - 1].trackAt
         );
@@ -55,17 +91,33 @@ class Main extends Component {
         await this.setInitPlayList();
       }
 
+      console.log(this.state.todayOrder);
+
       try {
-        if (this.state.file.url) {
+        if (this.state.todayOrder >= 0) {
           this._onFinishedPlayingSubscription = await SoundPlayer.addEventListener(
             'FinishedPlaying',
-            ({ success }) => {
+            ({success}) => {
               console.log('finished playing', success);
             }
           );
+          this._onFinishedLoadingFileSubscription = await SoundPlayer.addEventListener(
+            'FinishedLoadingFile',
+            async ({success, name, type}) => {
+              console.log(success, name, type);
+              if (success) {
+                console.log('finished loading file', success, name, type);
+                const info = await SoundPlayer.getInfo();
+                this.setState({
+                  duration: info.duration,
+                  isPlaying: true,
+                  isReady: true,
+                });
+              }
+            })
           this._onFinishedLoadingURLSubscription = await SoundPlayer.addEventListener(
             'FinishedLoadingURL',
-            async ({ success, url }) => {
+            async ({success, url}) => {
               if (success) {
                 const info = await SoundPlayer.getInfo();
                 this.setState({
@@ -76,7 +128,8 @@ class Main extends Component {
             }
           );
 
-          SoundPlayer.loadUrl(this.state.file.url);
+          SoundPlayer.playSoundFile(files[this.state.todayOrder].name, files[this.state.todayOrder].type);
+          // SoundPlayer.loadUrl(this.state.file.url);
 
           this.timer = setInterval(async () => {
             if (this.state.isPlaying) {
@@ -95,7 +148,6 @@ class Main extends Component {
               }
             }
           }, 500);
-          // await this.onPlay();
         }
 
         return true;
@@ -109,6 +161,7 @@ class Main extends Component {
   componentWillUnmount() {
     this._onFinishedPlayingSubscription.remove();
     this._onFinishedLoadingURLSubscription.remove();
+    this._onFinishedLoadingFileSubscription.remove();
   }
 
   getDayDiff = val => (date.getTime() - val) / (1000 * 3600 * 24);
@@ -131,7 +184,7 @@ class Main extends Component {
           playLogs: userData.playLogs,
           selectedIndex: this.getDayDiff(userData.createdAt) > 7 ? 0 : 1,
         });
-        // console.log(this.getDayDiff(userData.createdAt))
+
         resolve(userData);
       });
     });
@@ -180,6 +233,7 @@ class Main extends Component {
             playLogs: [
               {
                 fileId: file.id,
+                order: file.order,
                 trackAt: date.getTime(),
               },
             ],
@@ -214,13 +268,14 @@ class Main extends Component {
 
             playLogs.push({
               fileId: file.id,
+              order: file.order,
               trackAt: date.getTime(),
             });
             await firebase
               .firestore()
               .collection('users')
               .doc(this.state.uid)
-              .set({ playLogs }, { merge: true });
+              .set({playLogs}, {merge: true});
 
             resolve(true);
             break;
@@ -235,7 +290,7 @@ class Main extends Component {
         current: 0,
       });
     }
-    const { isPlaying } = this.state;
+    const {isPlaying} = this.state;
     if (isPlaying) {
       SoundPlayer.pause();
     } else {
@@ -257,7 +312,7 @@ class Main extends Component {
   };
 
   render() {
-    const { selectedIndex, isPlaying, isReady, current, duration } = this.state;
+    const {selectedIndex, isPlaying, isReady, current, duration} = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.dayContainer}>
