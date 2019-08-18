@@ -18,8 +18,8 @@ import { signIn, signInWithFacebook } from '../../api/auth';
 const { height } = Dimensions.get('screen');
 class Login extends Component {
   state = {
-    email: '',
-    password: '',
+    email: 'tester01@mail.com',
+    password: 'tester',
     loaderVisible: false,
   };
 
@@ -133,7 +133,7 @@ class Login extends Component {
             </Text>
           </View>
           <View style={styles.bottomContainer}>
-            <Text style={styles.logoText}>© 2019 Inaday</Text>
+            <Text style={styles.logoText}>© 2019 TLDR</Text>
           </View>
           <Loader visible={loaderVisible} />
         </View>
@@ -175,8 +175,8 @@ const styles = StyleSheet.create({
     letterSpacing: -0.5,
   },
   logo: {
-    height: '16%',
-    marginTop: '35%',
+    height: '20%',
+    marginTop: '25%',
   },
   logoText: {
     fontSize: 12,

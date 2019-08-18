@@ -56,16 +56,12 @@ class Setting extends Component {
   render() {
     const { loaderVisible } = this.state;
     const { goBack } = this.props.navigation;
-    const terms = 'Welcome to the beta version of TL;DR!\n' +
-      'Our mission is to bridge the gap between the busy world of work and the brilliant world of books.\n\n' +
-      'Throughout the many ups and downs in our careers, books have been there as pillars of wisdom and hope. We hope they’ll be the same for you.\n\n' +
-      'We bring you entertaining, inspirational book summaries to accelerate careers and companies. At about 5 minutes each, you can listen on the way to work, on your lunch break, or any time you need a boost.\n\n' +
-      'You’ll find that each summary is sprinkled with humor, story, and music.\n\n' +
-      'We’re big believers in the mantra, “If it’s not fun, you’re not doing it right!”\n\n' +
+    const terms = 'Throughout the many ups and downs in our careers, books have been there as pillars of wisdom and hope. We hope they’ll be the same for you.\n\n' +
+      'We bring you entertaining, inspirational book summaries to accelerate careers and companies. You’ll find that each summary is sprinkled with humor, story, and music. We’re big believers in the mantra, “If it’s not fun, you’re not doing it right!”\n\n' +
       'As part of the beta, each day you’ll get a new summary. Day 1 is Shoe Dog, the story of how Phil Knight and Nike put shoes on the world’s feet.\n\n' +
       'The beta is just a taste of what’s to come.\n\n' +
       'Enjoy!\n\n' +
-      'Email our team at team@hellotldr.com to discuss job openings, partnerships, questions, or ideas.';
+      'Email our team at team@hellotldr.com to discuss job openings, partnerships, questions, or ideas';
 
     return (
       <ScrollView style={{ flex: 1, backgroundColor: '#373E4C' }}>
@@ -97,15 +93,16 @@ class Setting extends Component {
             {/*  style={{ marginTop: height * 0.01 }}*/}
             {/*  onPress={this.onUpgradeYear}*/}
             {/*/>*/}
-            <TouchableOpacity style={styles.backButton} onPress={() => goBack()}>
+            <TouchableOpacity style={styles.backButton} onPress={this.onNavigateToMain}>
               <Image
                 source={require('../../assets/icons/backIcon.png')}
                 style={styles.backButtonImg}
                 resizeMode="contain"
               />
             </TouchableOpacity>
-            <Text style={styles.topText}>ABOUT</Text>
+            <Text style={styles.topText}>ABOUT TL;DR</Text>
             <Text style={styles.topDescription}>{terms}</Text>
+            <Text style={styles.topDescription_left}>2019 C TLDR</Text>
             <LoginButton
               title="LOG OUT"
               style={{ marginTop: (height * 5) / 100 }}
@@ -117,7 +114,7 @@ class Setting extends Component {
               </TouchableOpacity>
             </View>
             <View style={styles.bottomContainer}>
-              <Text style={styles.logoText}>© 2019 Inaday</Text>
+              <Text style={styles.logoText}>© 2019 TLDR</Text>
             </View>
             <Loader visible={loaderVisible} />
           </View>
@@ -163,7 +160,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'flex-end',
     justifyContent: 'flex-end',
-    marginBottom: 30,
+    marginBottom: (height * 2.5) / 100,
     right: 30,
   },
   desc: {
@@ -180,7 +177,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: '#FFFFFF',
-    marginTop: 70,
+    marginTop: (height * 15) / 100,
     letterSpacing: 3.2,
   },
   topDescription: {
@@ -192,6 +189,16 @@ const styles = StyleSheet.create({
     letterSpacing: -0.2,
     paddingHorizontal: 10,
     textAlign: 'center',
+  },
+  topDescription_left: {
+    marginTop: (height * 2.5) / 100,
+    width: '95%',
+    fontSize: 14,
+    fontWeight: 'normal',
+    color: '#FFFFFF',
+    letterSpacing: -0.2,
+    paddingHorizontal: 10,
+    textAlign: 'right',
   },
   termContainer: {
     marginTop: (height * 6.5) / 100,

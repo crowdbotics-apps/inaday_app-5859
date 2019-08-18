@@ -129,7 +129,7 @@ class Signup extends Component {
             </TouchableOpacity>
           </View>
           <View style={styles.bottomContainer}>
-            <Text style={styles.logoText}>© 2019 Inaday</Text>
+            <Text style={styles.logoText}>© 2019 TLDR</Text>
           </View>
           <Loader visible={loaderVisible} />
         </View>
@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    height: '16%',
-    marginTop: '35%',
+    height: '20%',
+    marginTop: '25%',
   },
   singInContainer: {
     marginTop: 15,

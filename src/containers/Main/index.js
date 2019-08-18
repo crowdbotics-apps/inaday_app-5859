@@ -52,6 +52,10 @@ const files = [
     name: '7-Grinding_It_Out_Book_Summary_Final',
     type: 'mp3',
   },
+  {
+    name: 'test01',
+    type: 'mp3',
+  },
 ];
 
 class Main extends Component {
@@ -66,94 +70,15 @@ class Main extends Component {
   timer = null;
 
   async componentDidMount() {
+    await this.reload();
+    await this.onTrack();
+
     this.props.navigation.addListener('willFocus', async () => {
-      this.setState(initialState);
-      const uid = await AsyncStorage.getItem('@InadayStore');
-      this.setState({
-        uid,
-      });
-      console.log('uid', uid);
-      await this.getUserByUid(this.state.uid);
-
-      if (this.state.playLogs && this.state.playLogs.length > 0) {
-        this.setState({
-          todayOrder: this.state.playLogs[this.state.playLogs.length - 1].order,
-        });
-        const timeDiff = this.getDayDiff(
-          this.state.playLogs[this.state.playLogs.length - 1].trackAt
-        );
-        if (timeDiff > 1) {
-          await this.setNextPlayList();
-        } else {
-          await this.onTodayPlay();
-        }
-      } else {
-        await this.setInitPlayList();
-      }
-
-      console.log(this.state.todayOrder);
-
-      try {
-        if (this.state.todayOrder >= 0) {
-          this._onFinishedPlayingSubscription = await SoundPlayer.addEventListener(
-            'FinishedPlaying',
-            ({success}) => {
-              console.log('finished playing', success);
-            }
-          );
-          this._onFinishedLoadingFileSubscription = await SoundPlayer.addEventListener(
-            'FinishedLoadingFile',
-            async ({success, name, type}) => {
-              console.log(success, name, type);
-              if (success) {
-                console.log('finished loading file', success, name, type);
-                const info = await SoundPlayer.getInfo();
-                this.setState({
-                  duration: info.duration,
-                  isPlaying: true,
-                  isReady: true,
-                });
-              }
-            })
-          this._onFinishedLoadingURLSubscription = await SoundPlayer.addEventListener(
-            'FinishedLoadingURL',
-            async ({success, url}) => {
-              if (success) {
-                const info = await SoundPlayer.getInfo();
-                this.setState({
-                  duration: info.duration,
-                  isReady: true,
-                });
-              }
-            }
-          );
-
-          SoundPlayer.playSoundFile(files[this.state.todayOrder].name, files[this.state.todayOrder].type);
-          // SoundPlayer.loadUrl(this.state.file.url);
-
-          this.timer = setInterval(async () => {
-            if (this.state.isPlaying) {
-              if (this.state.current >= this.state.duration) {
-                clearInterval(this.timer);
-                SoundPlayer.seek(0);
-                this.setState({
-                  isPlaying: false,
-                  isReady: false,
-                });
-              } else {
-                const info = await SoundPlayer.getInfo();
-                this.setState({
-                  current: info.currentTime,
-                });
-              }
-            }
-          }, 500);
-        }
-
-        return true;
-      } catch (error) {
-        console.log(error);
-        return false;
+      // console.log('===>', global.reload);
+      if (global.reload) {
+        await this.reload();
+        await this.onTrack();
+        global.reload = false;
       }
     });
   }
@@ -163,6 +88,103 @@ class Main extends Component {
     this._onFinishedLoadingURLSubscription.remove();
     this._onFinishedLoadingFileSubscription.remove();
   }
+
+  reload = async () => {
+    this.setState(initialState);
+    const uid = await AsyncStorage.getItem('@InadayStore');
+    this.setState({
+      uid,
+    });
+    // console.log('uid', uid);
+    await this.getUserByUid(this.state.uid);
+
+    if (this.state.playLogs && this.state.playLogs.length > 0) {
+      this.setState({
+        todayOrder: this.state.playLogs[this.state.playLogs.length - 1].order,
+      });
+      const timeDiff = this.getDayDiff(
+        this.state.playLogs[this.state.playLogs.length - 1].trackAt
+      );
+      if (timeDiff > 1) {
+        await this.setNextPlayList();
+      } else {
+        await this.onTodayPlay();
+      }
+    } else {
+      await this.setInitPlayList();
+    }
+
+    console.log(this.state.todayOrder);
+  };
+
+  onTrack = async() => {
+    try {
+      if (this.state.todayOrder >= 0) {
+        this._onFinishedPlayingSubscription = await SoundPlayer.addEventListener(
+          'FinishedPlaying',
+          ({success}) => {
+            console.log('finished playing', success);
+            this.setState({
+              isPlaying: false,
+              isReady: true,
+            });
+          }
+        );
+        this._onFinishedLoadingFileSubscription = await SoundPlayer.addEventListener(
+          'FinishedLoadingFile',
+          async ({success, name, type}) => {
+            // console.log(success, name, type);
+            if (success) {
+              // console.log('finished loading file', success, name, type);
+              const info = await SoundPlayer.getInfo();
+              this.setState({
+                duration: info.duration,
+                isPlaying: true,
+                isReady: true,
+              });
+            }
+          });
+        this._onFinishedLoadingURLSubscription = await SoundPlayer.addEventListener(
+          'FinishedLoadingURL',
+          async ({success, url}) => {
+            if (success) {
+              const info = await SoundPlayer.getInfo();
+              this.setState({
+                duration: info.duration,
+                isReady: true,
+              });
+            }
+          }
+        );
+
+        SoundPlayer.playSoundFile(files[this.state.todayOrder].name, files[this.state.todayOrder].type);
+        // SoundPlayer.loadUrl(this.state.file.url);
+
+        this.timer = setInterval(async () => {
+          if (this.state.isPlaying) {
+            if (this.state.current >= this.state.duration) {
+              clearInterval(this.timer);
+              SoundPlayer.seek(0);
+              this.setState({
+                isPlaying: false,
+                isReady: false,
+              });
+            } else {
+              const info = await SoundPlayer.getInfo();
+              this.setState({
+                current: info.currentTime,
+              });
+            }
+          }
+        }, 500);
+      }
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
 
   getDayDiff = val => (date.getTime() - val) / (1000 * 3600 * 24);
 
@@ -396,12 +418,12 @@ const styles = StyleSheet.create({
   },
   settingsBtn: {
     position: 'absolute',
-    top: 40,
+    top: 50,
     right: 40,
   },
   settingsBtnImg: {
-    width: 20,
-    height: 20,
+    width: 25,
+    height: 25,
   },
   dot: {
     width: 32,

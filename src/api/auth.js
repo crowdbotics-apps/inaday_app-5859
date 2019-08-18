@@ -1,10 +1,12 @@
 import firebase from 'react-native-firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import AsyncStorage from '@react-native-community/async-storage';
+import SoundPlayer from 'react-native-sound-player';
 const date = new Date();
 
 
 export const signUp = async (email, password) => {
+  global.reload = true;
   const res = await firebase.auth().createUserWithEmailAndPassword(email, password);
   await firebase.firestore().collection('users').doc(res.user.uid).set({
     email,
@@ -14,11 +16,14 @@ export const signUp = async (email, password) => {
 }
 
 export const signIn = async (email, password) => {
+  global.reload = true;
+  SoundPlayer.seek(0);
   const result = await firebase.auth().signInWithEmailAndPassword(email, password);
   await AsyncStorage.setItem('@InadayStore', result.user.uid);
 }
 
 export const signInWithFacebook = async () => {
+  global.reload = true;
   LoginManager.logOut();
   const result = await LoginManager.logInWithPermissions(['public_profile', 'email'])
 
@@ -53,6 +58,8 @@ export const signInWithFacebook = async () => {
 }
 
 export const Logout = async () => {
+  global.reload = false;
+  SoundPlayer.stop();
   await firebase.auth().signOut();
   await AsyncStorage.removeItem('@InadayStore');
 }
