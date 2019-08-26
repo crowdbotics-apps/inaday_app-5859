@@ -3,6 +3,7 @@ package com.inaday_app_5859;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.johnsonsu.rnsoundplayer.RNSoundPlayerPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
             new AsyncStoragePackage(),
             new RNSoundPlayerPackage(),
           new FBSDKPackage(),
