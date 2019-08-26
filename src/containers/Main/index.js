@@ -16,68 +16,65 @@ const initialState = {
   isReady: false,
   isPlaying: false,
   isRequiredSubscription: false,
-  file: {},
+  file: '',
   playLogs: [],
   selectedIndex: 0,
   todayOrder: 0,
   uid: null,
 };
 
-const files = [
-  {
-    name: '1-Shoe_Dog_Book_Summary',
-    type: 'mp3',
-  },
-  {
-    name: '2-Atomic_Habits_Book_Summary_Final',
-    type: 'm4a',
-  },
-  {
-    name: '3-The_Magic_of_Big_Thinking_Book_Summary_Final',
-    type: 'm4a',
-  },
-  {
-    name: '4-The_80-20_Principle_Book_Summary_Final',
-    type: 'm4a',
-  },
-  {
-    name: '5-The_War_of_Art_Book_Summary',
-    type: 'm4a',
-  },
-  {
-    name: '6-Radical_Candor_Book_Summary_Final',
-    type: 'm4a',
-  },
-  {
-    name: '7-Grinding_It_Out_Book_Summary_Final',
-    type: 'mp3',
-  },
-  {
-    name: 'test01',
-    type: 'mp3',
-  },
-];
+// const files = [
+//   {
+//     name: '1-Shoe_Dog_Book_Summary',
+//     type: 'mp3',
+//   },
+//   {
+//     name: '2-Atomic_Habits_Book_Summary_Final',
+//     type: 'm4a',
+//   },
+//   {
+//     name: '3-The_Magic_of_Big_Thinking_Book_Summary_Final',
+//     type: 'm4a',
+//   },
+//   {
+//     name: '4-The_80-20_Principle_Book_Summary_Final',
+//     type: 'm4a',
+//   },
+//   {
+//     name: '5-The_War_of_Art_Book_Summary',
+//     type: 'm4a',
+//   },
+//   {
+//     name: '6-Radical_Candor_Book_Summary_Final',
+//     type: 'm4a',
+//   },
+//   {
+//     name: '7-Grinding_It_Out_Book_Summary_Final',
+//     type: 'mp3',
+//   },
+//   {
+//     name: 'test01',
+//     type: 'mp3',
+//   },
+// ];
 
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
+    this._onFinishedPlayingSubscription = null;
+    this._onFinishedLoadingURLSubscription = null;
+    this._onFinishedLoadingFileSubscription = null;
+    this.timer = null;
   }
 
-  _onFinishedPlayingSubscription = null;
-  _onFinishedLoadingURLSubscription = null;
-  _onFinishedLoadingFileSubscription = null;
-  timer = null;
+  
 
   async componentDidMount() {
     await this.reload();
-    await this.onTrack();
-
     this.props.navigation.addListener('willFocus', async () => {
-      // console.log('===>', global.reload);
       if (global.reload) {
         await this.reload();
-        await this.onTrack();
         global.reload = false;
       }
     });
@@ -97,7 +94,6 @@ class Main extends Component {
     });
     // console.log('uid', uid);
     await this.getUserByUid(this.state.uid);
-
     if (this.state.playLogs && this.state.playLogs.length > 0) {
       this.setState({
         todayOrder: this.state.playLogs[this.state.playLogs.length - 1].order,
@@ -106,18 +102,20 @@ class Main extends Component {
         this.state.playLogs[this.state.playLogs.length - 1].trackAt
       );
       if (timeDiff > 1) {
-        await this.setNextPlayList();
+        this.setNextPlayList().then((res) => {
+          this.onTrack();
+        });
       } else {
-        await this.onTodayPlay();
+        this.onTodayPlay().then((res) => {
+          this.onTrack();
+        });
       }
     } else {
       await this.setInitPlayList();
     }
-
-    console.log(this.state.todayOrder);
   };
 
-  onTrack = async() => {
+  onTrack = async () => {
     try {
       if (this.state.todayOrder >= 0) {
         this._onFinishedPlayingSubscription = await SoundPlayer.addEventListener(
@@ -157,8 +155,78 @@ class Main extends Component {
           }
         );
 
-        SoundPlayer.playSoundFile(files[this.state.todayOrder].name, files[this.state.todayOrder].type);
-        // SoundPlayer.loadUrl(this.state.file.url);
+        // SoundPlayer.playSoundFile(files[this.state.todayOrder].name, files[this.state.todayOrder].type);
+        this.state.file ? SoundPlayer.loadUrl(this.state.file.url) : '';
+
+        this.timer = setInterval(async () => {
+          if (this.state.isPlaying) {
+            if (this.state.current >= this.state.duration) {
+              clearInterval(this.timer);
+              SoundPlayer.seek(0);
+              this.setState({
+                isPlaying: false,
+                isReady: false,
+              });
+            } else {
+              const info = await SoundPlayer.getInfo();
+              this.setState({
+                current: info.currentTime,
+              });
+            }
+          }
+        }, 500);
+      }
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+
+  onIntTrack = async (file) => {
+    try {
+      if (this.state.todayOrder >= 0) {
+        this._onFinishedPlayingSubscription = await SoundPlayer.addEventListener(
+          'FinishedPlaying',
+          ({success}) => {
+            console.log('finished playing', success);
+            this.setState({
+              isPlaying: false,
+              isReady: true,
+            });
+          }
+        );
+        this._onFinishedLoadingFileSubscription = await SoundPlayer.addEventListener(
+          'FinishedLoadingFile',
+          async ({success, name, type}) => {
+            // console.log(success, name, type);
+            if (success) {
+              // console.log('finished loading file', success, name, type);
+              const info = await SoundPlayer.getInfo();
+              this.setState({
+                duration: info.duration,
+                isPlaying: true,
+                isReady: true,
+              });
+            }
+          });
+        this._onFinishedLoadingURLSubscription = await SoundPlayer.addEventListener(
+          'FinishedLoadingURL',
+          async ({success, url}) => {
+            if (success) {
+              const info = await SoundPlayer.getInfo();
+              this.setState({
+                duration: info.duration,
+                isReady: true,
+              });
+            }
+          }
+        );
+
+        // SoundPlayer.playSoundFile(files[this.state.todayOrder].name, files[this.state.todayOrder].type);
+        SoundPlayer.loadUrl(file.url);
 
         this.timer = setInterval(async () => {
           if (this.state.isPlaying) {
@@ -243,6 +311,9 @@ class Main extends Component {
         .limit(1);
       firstPlayerRef.get().then(async snapshot => {
         let file = await snapshot.docs[0].data();
+        if(file){
+          this.onIntTrack(file)
+        }
         this.setState({
           file,
         });
@@ -334,7 +405,7 @@ class Main extends Component {
   };
 
   render() {
-    const {selectedIndex, isPlaying, isReady, current, duration} = this.state;
+    const {selectedIndex, isPlaying, isReady, current, duration, file} = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.dayContainer}>
@@ -346,7 +417,7 @@ class Main extends Component {
               isReady={isReady}
               current={current}
               duration={duration}
-              onPlay={this.onPlay}
+              onPlay={() => this.onPlay()}
             />
           )}
         </View>
