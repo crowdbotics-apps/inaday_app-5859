@@ -148,6 +148,8 @@ PODS:
   - react-native-fbsdk/Share (0.10.1):
     - FBSDKShareKit (~> 5.0.0)
     - React
+  - react-native-splash-screen (3.2.0):
+    - React
   - React/Core (0.59.8):
     - yoga (= 0.59.8.React)
   - React/CxxBridge (0.59.8):
@@ -218,6 +220,7 @@ DEPENDENCIES:
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
+  - react-native-splash-screen (from `../node_modules/react-native-splash-screen`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
   - React/DevSupport (from `../node_modules/react-native`)
@@ -271,6 +274,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native"
   react-native-fbsdk:
     :path: "../node_modules/react-native-fbsdk"
+  react-native-splash-screen:
+    :path: "../node_modules/react-native-splash-screen"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-community/async-storage"
   RNGestureHandler:
@@ -306,10 +311,11 @@ SPEC CHECKSUMS:
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
   React: 76e6aa2b87d05eb6cccb6926d72685c9a07df152
   react-native-fbsdk: 38ee580e77319d03f8ed0bf4a020cbfd70dc4d2d
+  react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   RNCAsyncStorage: 2e2e3feb9bdadc752a026703d8c4065ca912e75a
   RNGestureHandler: 5329a942fce3d41c68b84c2c2276ce06a696d8b0
   yoga: 92b2102c3d373d1a790db4ab761d2b0ffc634f64
 
-PODFILE CHECKSUM: 297bf6370858a9213e30ff958299f6a96cd0056f
+PODFILE CHECKSUM: 40f6bdd8cfb9df0e05944290d655af0c30df8af8
 
 COCOAPODS: 1.7.4

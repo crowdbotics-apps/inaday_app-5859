@@ -15,6 +15,7 @@
 
 #import "RNFirebaseNotifications.h"
 #import "RNFirebaseMessaging.h"
+#import "RNSplashScreen.h"
 
 @implementation AppDelegate
 
@@ -42,6 +43,9 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  [RNSplashScreen showSplash:@"LaunchScreen" inRootView:rootView];
+
   return YES;
 }
 
@@ -57,7 +61,7 @@
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-  
+
   BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
             openURL:url
             sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
@@ -81,7 +85,7 @@ fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHand
 }
 
 -(void) userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler {
-  
+
   [[RNFirebaseMessaging instance] didReceiveRemoteNotification:response.notification.request.content.userInfo];
   completionHandler();
 }
@@ -89,4 +93,4 @@ fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHand
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
   [[RNFirebaseNotifications instance] didReceiveLocalNotification:notification];
 }
-@end 
+@end
