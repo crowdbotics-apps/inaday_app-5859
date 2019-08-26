@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
  * You can import more reducers here
  */
 
-export const combinedReducers = combineReducers({
+export default combineReducers({
   blank: (state, action) => {
     if (state == null) state = [];
     return state;
