@@ -18,7 +18,7 @@ function *watchUser() {
       const { user } = yield take(channel)
 
       if(!user) {
-        yield put(updateAuthUser(null))
+        yield put(updateAuthUser({ uid: null }))
       } else {
         const { uid } = user
 

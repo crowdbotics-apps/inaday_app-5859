@@ -1,11 +1,6 @@
 import { combineReducers } from "redux";
-/**
- * You can import more reducers here
- */
+import { auth } from './auth'
 
 export default combineReducers({
-  blank: (state, action) => {
-    if (state == null) state = [];
-    return state;
-  }
+  auth,
 });
