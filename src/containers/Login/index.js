@@ -82,7 +82,7 @@ class Login extends Component {
       <View style={styles.container}>
         <View style={styles.background}>
           <Image
-            source={require('../../assets/images/logo.png')}
+            source={{uri: 'logo'}}
             style={styles.logo}
             resizeMode="contain"
           />
@@ -175,7 +175,8 @@ const styles = StyleSheet.create({
     letterSpacing: -0.5,
   },
   logo: {
-    height: '20%',
+    width: 150,
+    height: 150,
     marginTop: '25%',
   },
   logoText: {

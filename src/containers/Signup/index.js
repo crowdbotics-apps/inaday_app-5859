@@ -82,7 +82,7 @@ class Signup extends Component {
       <View style={styles.container}>
         <View style={styles.background}>
           <Image
-            source={require('../../assets/images/logo.png')}
+            source={{uri: 'logo'}}
             style={styles.logo}
             resizeMode="contain"
           />
@@ -158,8 +158,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   logo: {
-    height: '20%',
     marginTop: '25%',
+    width: 150,
+    height: 150,
   },
   singInContainer: {
     marginTop: 15,
