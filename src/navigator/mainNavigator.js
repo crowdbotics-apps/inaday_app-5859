@@ -3,7 +3,6 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen'
 
-import Splash from "../containers/Splash";
 import Login from "../containers/Login";
 import Signup from "../containers/Signup";
 import Main from "../containers/Main";
@@ -27,9 +26,6 @@ const MainNavigator = React.memo(props => {
 
   const AppNavigator = createStackNavigator(
     {
-      // splash: {
-      //   screen: Splash
-      // },
       login: {
         screen: Login
       },
