@@ -63,9 +63,7 @@ export default class App extends React.Component {
 
   renderApp = () => (
     <ReduxProvider store={store}>
-      <ApplicationProvider mapping={mapping} theme={light}>
-        <MainNavigator/>
-      </ApplicationProvider>
+      <MainNavigator/>
     </ReduxProvider>
   );
 
