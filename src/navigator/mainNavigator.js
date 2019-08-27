@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import { connect } from 'react-redux';
+import SplashScreen from 'react-native-splash-screen'
 
 import Splash from "../containers/Splash";
 import Login from "../containers/Login";
@@ -12,6 +13,12 @@ import Policy from "../containers/Policy";
 import Terms from "../containers/Terms";
 
 const MainNavigator = React.memo(props => {
+  useEffect(() => {
+    if(props.auth !== undefined) {
+      SplashScreen.hide()
+    }
+  }, [props.auth])
+
   const { auth } = props
 
   if(auth.uid === undefined) { // still loading
