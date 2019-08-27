@@ -20,9 +20,9 @@ const MainNavigator = React.memo(props => {
 
   const AppNavigator = createStackNavigator(
     {
-      splash: {
-        screen: Splash
-      },
+      // splash: {
+      //   screen: Splash
+      // },
       login: {
         screen: Login
       },
