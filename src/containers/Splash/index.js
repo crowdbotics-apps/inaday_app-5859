@@ -18,11 +18,11 @@ class Splash extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.background}>
-          <Image
+          {/* <Image
             source={require('../../assets/images/logo.png')}
             style={styles.logo}
             resizeMode="contain"
-          />
+          /> */}
         </View>
       </View>
     );
